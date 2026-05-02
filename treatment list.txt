@@ -1,0 +1,258 @@
+🩺 Common Acute Conditions
+Common cold (ज़ुकाम)
+Fever (बुखार)
+Cough (खांसी)
+Sore throat (गले में खराश)
+Tonsillitis (टॉन्सिल)
+Sinusitis (साइनस)
+Flu / Influenza (फ्लू)
+Viral infections (वायरल बुखार)
+Ear infection (कान का संक्रमण)
+Eye irritation / conjunctivitis (आँख आना)
+🌿 Digestive Disorders
+Acidity (एसिडिटी)
+Indigestion (अपच)
+Gastritis (गैस्ट्राइटिस)
+Constipation (कब्ज)
+Diarrhea (दस्त)
+IBS – Irritable bowel syndrome
+Worm infestation (पेट के कीड़े)
+Piles / Hemorrhoids (बवासीर)
+Fissure (गुदा विदर)
+Liver disorders (जिगर की समस्या)
+💧 Skin Diseases
+Acne / Pimples (मुंहासे)
+Eczema (एक्जिमा)
+Psoriasis (सोरायसिस)
+Fungal infections (दाद)
+Urticaria / hives (पित्ती)
+Boils (फोड़े)
+Warts (मस्से)
+Corns (गांठ)
+Vitiligo / leucoderma (सफेद दाग)
+Hair fall (बाल झड़ना)
+🫁 Respiratory Problems
+Asthma (दमा)
+Bronchitis (ब्रोंकाइटिस)
+Allergic rhinitis (एलर्जी)
+COPD (क्रॉनिक फेफड़ा रोग)
+Whooping cough (काली खांसी)
+Tuberculosis support (टीबी – supportive care only)
+🧠 Nervous System & Mental Health
+Anxiety (चिंता)
+Depression (अवसाद)
+Insomnia (नींद न आना)
+Migraine (आधा सिर दर्द)
+Headache (सिर दर्द)
+Vertigo (चक्कर)
+Epilepsy (मिर्गी) – supportive
+Stress disorders (तनाव)
+💪 Musculoskeletal Disorders
+Arthritis (गठिया)
+Rheumatoid arthritis
+Osteoarthritis
+Back pain (कमर दर्द)
+Sciatica (साइटिका)
+Cervical spondylosis
+Joint pain (जोड़ों का दर्द)
+Muscle cramps (मांसपेशियों में ऐंठन)
+Frozen shoulder
+👩‍⚕️ Female Health Issues
+Irregular periods (अनियमित माहवारी)
+Painful periods (दर्दनाक माहवारी)
+PCOS / PCOD
+Menorrhagia (अधिक रक्तस्राव)
+Leucorrhoea (सफेद पानी)
+Menopause symptoms
+Fibroids (गांठ)
+Infertility – supportive
+👨‍⚕️ Male Health Issues
+Erectile dysfunction
+Premature ejaculation (शीघ्रपतन)
+Low libido
+Prostate enlargement (प्रोस्टेट बढ़ना)
+🩸 Metabolic & Chronic Diseases
+Diabetes (मधुमेह) – supportive
+Thyroid disorders (थायरॉइड)
+Obesity (मोटापा)
+High BP (उच्च रक्तचाप)
+High cholesterol
+🦷 Dental & Oral
+Toothache (दांत दर्द)
+Gum bleeding (मसूड़ों से खून)
+Mouth ulcers (मुंह के छाले)
+Pyorrhea
+👶 Children’s Conditions
+Teething problems
+Bedwetting (बिस्तर गीला करना)
+Colic pain
+Recurrent infections
+ADHD – supportive
+🧬 Allergies & Autoimmune
+Food allergies
+Dust allergy
+Autoimmune disorders – supportive
+Lupus – supportive
+🧪 Urinary & Kidney
+UTI (मूत्र संक्रमण)
+Kidney stones (पथरी)
+Frequent urination
+Burning urination
+🦠 Other Conditions
+Dengue – supportive
+Malaria – supportive
+Typhoid – supportive
+Chronic fatigue syndrome
+Hair dandruff (रूसी)
+Nail infections
+Motion sickness
+Sunstroke
+Obsessive-compulsive disorder (OCD)
+Panic attacks
+Phobias
+Sexual weakness
+Varicose veins
+Heel pain (एड़ी दर्द)
+Corn allergy
+Dry skin
+Cracked heels (फटी एड़ी)
+Eye strain
+🌡️ General & Infectious Conditions
+Chikungunya (चिकनगुनिया – supportive)
+Viral arthritis
+Recurrent fever
+Post-viral fatigue
+Swine flu (H1N1 – supportive)
+Heat rash (घमौरियां)
+Chickenpox (चेचक – supportive)
+Measles (खसरा – supportive)
+Mumps (गलसुआ – supportive)
+Sepsis recovery support
+🧠 Neurological & Psychological
+Memory weakness (याददाश्त कमज़ोर)
+Brain fog
+Neuralgia (तंत्रिका दर्द)
+Trigeminal neuralgia
+Parkinsonism – supportive
+Alzheimer’s – supportive
+Exam anxiety
+Anger issues (गुस्सा अधिक आना)
+Emotional imbalance
+Sleepwalking
+💪 Bone, Joint & Muscle (Advanced)
+Gout (यूरिक एसिड बढ़ना)
+Ankylosing spondylitis
+Tennis elbow
+Heel spur
+Wrist pain
+Ligament injury (supportive healing)
+Post-fracture recovery
+Muscle stiffness
+Fibromyalgia
+Leg cramps (रात में ऐंठन)
+❤️ Cardiovascular (Supportive Care)
+Palpitations (दिल की धड़कन तेज)
+Mild hypertension
+Hypotension (लो BP)
+Varicose ulcers
+Poor circulation
+Edema (सूजन)
+Atherosclerosis – supportive
+Heart weakness feeling
+Breathlessness on exertion
+Anxiety-related chest pain
+🫁 ENT & Respiratory (Extended)
+Nasal polyps
+Deviated septum symptoms (DNS support)
+Snoring
+Post-nasal drip
+Loss of smell (सूंघने की क्षमता कम)
+Chronic throat clearing
+Voice hoarseness
+Laryngitis
+Seasonal cough
+Cold sensitivity
+👁️ Eye Disorders
+Dry eyes
+Watering eyes (आंख से पानी आना)
+Eye redness
+Stye (आंख की फुंसी)
+Weak eyesight – supportive
+Computer vision strain
+Allergic conjunctivitis
+Eyelid twitching
+Dark circles (आंखों के नीचे काले घेरे)
+Burning eyes
+👂 Ear Problems
+Tinnitus (कान में आवाज आना)
+Ear blockage
+Wax buildup
+Hearing weakness – supportive
+Vertigo due to ear issues
+🧬 Hormonal & Endocrine
+Hormonal imbalance
+Adrenal fatigue (functional concept)
+Delayed puberty
+Excessive sweating (पसीना अधिक आना)
+Night sweats
+Growth issues in children
+Hormonal acne
+Low metabolism
+Sugar cravings
+Mood swings (हार्मोनल)
+👩‍⚕️ Women’s Health (Extended)
+Ovarian cyst (अंडाशय की गांठ)
+Endometriosis (supportive)
+PMS (प्रीमेंस्ट्रुअल सिंड्रोम)
+Breast pain (मास्टाल्जिया)
+Lactation issues
+Recurrent miscarriage – supportive
+Vaginal infections
+Post-delivery weakness
+Delayed periods
+Spotting issues
+👨‍⚕️ Men’s Health (Extended)
+Testicular pain
+Varicocele (supportive)
+Nightfall (स्वप्नदोष)
+Sperm quality issues – supportive
+Performance anxiety
+🍽️ Digestive (Advanced)
+Food intolerance
+Lactose intolerance
+Bloating (पेट फूलना)
+Belching (डकार)
+Nausea (मतली)
+Motion-induced vomiting
+Gallbladder issues (supportive)
+Fatty liver (फैटी लिवर)
+Loss of appetite
+Bad breath (मुंह की बदबू)
+💧 Urinary & Reproductive
+Bedwetting in teens
+Urinary retention
+Overactive bladder
+Kidney infection (supportive)
+Prostate inflammation
+🧴 Skin & Hair (Advanced)
+Melasma (झाइयां)
+Hyperpigmentation
+Stretch marks
+Alopecia areata (गंजापन)
+Premature greying (सफेद बाल जल्दी आना)
+Itching without rash
+Sun allergy
+Skin dryness
+Cracked lips
+Nail brittleness
+🧠 Behavioral & Lifestyle
+Addiction recovery support (smoking/alcohol – supportive)
+Laziness / low motivation
+Overthinking
+Confidence issues
+Social anxiety
+Fear of public speaking
+Phobia of heights/water
+Irritability
+Attention issues
+Habit disorders (nail biting)
