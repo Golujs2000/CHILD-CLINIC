@@ -7,10 +7,10 @@ import { collection, addDoc, getDocs, deleteDoc, serverTimestamp } from 'firebas
 export const seedDoctors = [
   {
     name: 'Dr. Anshuman',
-    specialty: 'Pediatric Specialist & Clinical Nutritionist',
-    qualification: 'M.B.B.S., M.D. (Pediatrics), P.G.P.N. (Boston, USA)',
-    experience: 12,
-    bio: 'Dr. Anshuman is a renowned Pediatric Specialist and one of the few P.G.P.N. (Post Graduate Program in Nutrition, Boston University, USA) certified specialists in Bihar. He specializes in pediatric nutrition, growth monitoring, and general pediatric care.',
+    specialty: 'Pediatrician & Neonatologist',
+    qualification: 'M.B.B.S (PMCH Patna), D.C.H (PMCH Patna), M.D Pediatric (PMCH Patna), P.G.P.N (Boston U.S.A)',
+    experience: 7,
+    bio: 'Dr. Anshuman is a highly qualified Pediatrician and Neonatologist with over 7 years of experience in saving and nurturing young lives. He is dedicated to providing evidence-based, compassionate care for children of all ages. Previously, he served as a Senior Resident at I.G.I.M.S PATNA and as a Consultant at Mahavir Vatsalya Hospital Patna.',
     image: '',
     email: 'dranshuman@childclinic.com',
     phone: '6201592231',
@@ -18,7 +18,7 @@ export const seedDoctors = [
     availableDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     availableTime: '10:00 AM – 7:00 PM',
     specializations: ['Pediatric Nutrition', 'Growth & Development', 'General Pediatrics', 'Neonatology'],
-    hindiTitle: 'बाल रोग विशेषज्ञ एवं पोषण विशेषज्ञ',
+    hindiTitle: 'बाल रोग विशेषज्ञ एवं नवजात शिशु विशेषज्ञ',
     rating: 4.9,
     reviewCount: 150,
     featured: true,

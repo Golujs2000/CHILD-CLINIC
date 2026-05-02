@@ -21,10 +21,9 @@ const quickLinks = [
   { label: 'Home',              to: '/' },
   { label: 'About Us',          to: '/about' },
   { label: 'Our Doctors',       to: '/doctors' },
-  { label: 'Hospital Services', to: '/hospital-services' },
+  { label: 'Clinic Services',   to: '/services' },
+  { label: 'Specialities',      to: '/specialities' },
   { label: 'Book Appointment',  to: '/book-appointment' },
-  { label: 'Gallery',           to: '/gallery' },
-  { label: 'Blog',              to: '/blog' },
   { label: 'Contact',           to: '/contact' },
 ]
 
@@ -179,7 +178,7 @@ export default function Footer() {
         <div className="container-max px-4 md:px-8 py-10">
           <h4 className="font-heading font-semibold text-white mb-8 text-sm uppercase tracking-wider flex items-center gap-3">
             <span className="w-6 h-px bg-primary-500 inline-block" />
-            Specialities &amp; Treatments
+            Medical Specialities
             <span className="w-6 h-px bg-primary-500 inline-block" />
           </h4>
 
@@ -191,37 +190,13 @@ export default function Footer() {
                 <div key={spec.id}>
                   {/* Speciality header */}
                   <Link
-                    to={`/services/${spec.slug}`}
+                    to={`/specialities`}
                     className={`inline-flex items-center gap-1.5 font-heading font-bold text-xs uppercase tracking-wider mb-3 border-b pb-2 w-full ${color} hover:opacity-80 transition-opacity`}
                   >
                     {spec.icon && <span className="text-base leading-none">{spec.icon}</span>}
                     {spec.name}
                   </Link>
-
-                  {/* Treatment links */}
-                  <ul className="space-y-1.5">
-                    {treatments.map((t, i) => (
-                      <li key={i}>
-                        <Link
-                          to={`/services/${spec.slug}/treatment/${t.slug}`}
-                          className="text-xs text-gray-500 hover:text-primary-300 transition-colors flex items-start gap-1.5 group"
-                        >
-                          <span className="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-primary-400 mt-1.5 shrink-0 transition-colors" />
-                          {t.name}
-                        </Link>
-                      </li>
-                    ))}
-                    {treatments.length === 0 && (
-                      <li>
-                        <Link
-                          to={`/services/${spec.slug}`}
-                          className="text-xs text-gray-600 hover:text-primary-300 transition-colors"
-                        >
-                          View treatments →
-                        </Link>
-                      </li>
-                    )}
-                  </ul>
+                  <p className="text-[10px] text-gray-500 leading-relaxed mb-4">{spec.description?.substring(0, 60)}...</p>
                 </div>
               )
             })}

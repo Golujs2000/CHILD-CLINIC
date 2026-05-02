@@ -11,7 +11,8 @@ const mainLinks = [
   { label: 'Home',              to: '/' },
   { label: 'About Us',          to: '/about' },
   { label: 'Our Doctors',       to: '/doctors' },
-  { label: 'Services', to: '/hospital-services' },
+  { label: 'Services',          to: '/services' },
+  { label: 'Specialities',      to: '/specialities' },
   { label: 'Contact',           to: '/contact' },
 ]
 
@@ -22,9 +23,9 @@ function ServicesMegaMenu({ specialities, loading, onClose, mobile = false }) {
   if (mobile) {
     return (
       <div className="pl-4 mt-1 border-l-2 border-primary-100 max-h-[70vh] overflow-y-auto no-scrollbar space-y-0.5">
-        <Link to="/services" onClick={onClose}
+        <Link to="/specialities" onClick={onClose}
           className="flex items-center gap-2 px-3 py-2 rounded-[5px] text-sm font-semibold text-primary-600 hover:bg-primary-50 transition-colors">
-          🏥 All Specialities &amp; Treatments
+          🏥 All Medical Specialities
         </Link>
         {loading
           ? [...Array(4)].map((_, i) => <div key={i} className="h-8 bg-gray-100 rounded mx-3 animate-pulse" />)
@@ -32,45 +33,15 @@ function ServicesMegaMenu({ specialities, loading, onClose, mobile = false }) {
             const treatments = Array.isArray(spec.treatments) ? spec.treatments : []
             const isOpen = openSpec === spec.id
             return (
-              <div key={spec.id}>
-                <button
-                  onClick={() => setOpenSpec(isOpen ? null : spec.id)}
+                <Link
+                  to={`/specialities`}
+                  onClick={onClose}
                   className="w-full flex items-center justify-between gap-2 px-3 py-2 rounded-[5px] text-sm text-gray-700 font-semibold hover:bg-primary-50 hover:text-primary-700 transition-colors"
                 >
                   <span className="flex items-center gap-2">
                     <span>{spec.icon || '🏥'}</span>{spec.name}
                   </span>
-                  <span className="flex items-center gap-1 text-gray-400">
-                    <FiActivity className="w-3 h-3" />
-                    <span className="text-xs">{treatments.length}</span>
-                    <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.18 }}>
-                      <FiChevronDown size={13} />
-                    </motion.span>
-                  </span>
-                </button>
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.15 }}
-                      className="overflow-hidden pl-3"
-                    >
-                      <Link to={`/services/${spec.slug}`} onClick={onClose}
-                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-primary-600 hover:text-primary-800 transition-colors">
-                        <FiArrowRight size={10} /> View all {spec.name}
-                      </Link>
-                      {treatments.map((t) => (
-                        <Link key={t.slug} to={`/services/${spec.slug}/treatment/${t.slug}`} onClick={onClose}
-                          className="flex items-center gap-2 px-3 py-1.5 rounded-[5px] text-xs text-gray-600 hover:bg-primary-50 hover:text-primary-700 transition-colors">
-                          <span className="w-1 h-1 rounded-full bg-primary-400 flex-shrink-0" />
-                          {t.name}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                </Link>
               </div>
             )
           })
@@ -89,8 +60,8 @@ function ServicesMegaMenu({ specialities, loading, onClose, mobile = false }) {
     >
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-3 bg-primary-50 border-b border-primary-100">
-        <span className="text-sm font-bold text-primary-700">Speciality / Treatment</span>
-        <Link to="/services" onClick={onClose}
+        <span className="text-sm font-bold text-primary-700">Medical Specialities</span>
+        <Link to="/specialities" onClick={onClose}
           className="flex items-center gap-1 text-xs font-semibold text-primary-600 hover:text-primary-800 transition-colors">
           View All <FiArrowRight className="w-3 h-3" />
         </Link>
@@ -108,35 +79,17 @@ function ServicesMegaMenu({ specialities, loading, onClose, mobile = false }) {
               const treatments = Array.isArray(spec.treatments) ? spec.treatments : []
               return (
                 <div key={spec.id} className="px-4 py-3">
-                  {/* Speciality header — full link */}
                   <Link
-                    to={`/services/${spec.slug}`}
+                    to={`/specialities`}
                     onClick={onClose}
-                    className="flex items-center gap-2.5 mb-2 group"
+                    className="flex items-center gap-2.5 group"
                   >
                     <span className="text-lg leading-none flex-shrink-0">{spec.icon || '🏥'}</span>
                     <span className="text-sm font-bold text-navy-800 group-hover:text-primary-600 transition-colors">{spec.name}</span>
                     <span className="text-[10px] text-gray-400 ml-auto group-hover:text-primary-500 transition-colors flex items-center gap-1">
-                      <FiActivity size={10} /> {treatments.length} treatments
-                      <FiArrowRight size={10} />
+                      View Details <FiArrowRight size={10} />
                     </span>
                   </Link>
-
-                  {/* All treatments as links */}
-                  {treatments.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 pl-8">
-                      {treatments.map((t) => (
-                        <Link
-                          key={t.slug}
-                          to={`/services/${spec.slug}/treatment/${t.slug}`}
-                          onClick={onClose}
-                          className="text-xs px-2.5 py-1 rounded-full bg-gray-50 border border-gray-100 text-gray-600 hover:bg-primary-50 hover:border-primary-200 hover:text-primary-700 transition-colors"
-                        >
-                          {t.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
                 </div>
               )
             })}
@@ -146,7 +99,7 @@ function ServicesMegaMenu({ specialities, loading, onClose, mobile = false }) {
 
       {/* Footer */}
       <div className="px-5 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
-        <span className="text-xs text-gray-400">Click any treatment to view details, cost &amp; FAQs</span>
+        <span className="text-xs text-gray-400">Expert pediatric care across all major medical specialities.</span>
         <Link to="/book-appointment" onClick={onClose}
           className="text-xs font-bold text-white bg-primary-600 hover:bg-primary-700 px-3 py-1.5 rounded-[5px] transition-colors">
           Book Appointment
@@ -160,7 +113,8 @@ const NAV_LINKS = [
   { label: 'Home',              to: '/',                   end: true },
   { label: 'About Us',          to: '/about' },
   { label: 'Our Doctors',       to: '/doctors' },
-  { label: 'Services', to: '/hospital-services' },
+  { label: 'Services',          to: '/services' },
+  { label: 'Specialities',      to: '/specialities' },
   { label: 'Contact',           to: '/contact' },
 ]
 
@@ -273,7 +227,7 @@ export default function Navbar() {
                     isServicesActive || servicesOpen ? 'text-primary-600 active-link' : 'text-gray-600 hover:text-primary-600'
                   }`}
                 >
-                  Speciality / Treatment
+                  Specialities
                   <motion.span animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
                     <FiChevronDown size={14} />
                   </motion.span>
@@ -371,7 +325,7 @@ export default function Navbar() {
                         isServicesActive ? 'bg-primary-50 text-primary-600 border-l-4 border-primary-500' : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
                       }`}
                     >
-                      Speciality / Treatment
+                      Specialities
                       <motion.span animate={{ rotate: mobileServicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
                         <FiChevronDown size={16} />
                       </motion.span>

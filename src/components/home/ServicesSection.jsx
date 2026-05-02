@@ -62,7 +62,7 @@ export default function ServicesSection() {
                   transition={{ delay: i * 0.06 }}
                 >
                   <Link
-                    to={`/services/${spec.slug || spec.id}`}
+                    to={`/specialities`}
                     className="flex items-start gap-4 bg-white rounded-[5px] p-6 shadow-sm border border-gray-100 hover:shadow-md hover:border-primary-100 hover:-translate-y-0.5 transition-all duration-300 group h-full"
                   >
                     {/* Icon box */}
@@ -99,7 +99,7 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Link to="/services" className="btn-secondary">
+          <Link to="/specialities" className="btn-secondary">
             View All Specialities <FiArrowRight />
           </Link>
         </motion.div>

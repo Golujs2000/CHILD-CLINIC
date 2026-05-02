@@ -32,7 +32,6 @@ const NAV_LINKS = [
   { to: '/admin/gallery',      label: 'Gallery',        icon: FiImage },
   { to: '/admin/messages',     label: 'Messages',       icon: FiMail,        badge: true },
   { to: '/admin/specialities', label: 'Specialities',   icon: FiStar },
-  { to: '/admin/treatments',   label: 'Treatments',     icon: FiActivity },
   { to: '/admin/services',     label: 'Hosp. Services', icon: FiPlusSquare },
   // Admin-only links — hidden from staff role
   { to: '/admin/staff',        label: 'Staff',          icon: FiUserCheck,   adminOnly: true },

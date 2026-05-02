@@ -35,7 +35,6 @@ const EMPTY_FORM = {
   description: '', features: '', recoveryTime: '', order: 0,
   doctorIds: [],
 }
-const EMPTY_TREATMENT = { name: '', duration: '' }
 
 export default function AdminSpecialities() {
   const [specialities, setSpecialities] = useState([])
@@ -45,7 +44,6 @@ export default function AdminSpecialities() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editingId, setEditingId] = useState(null)
   const [form, setForm] = useState(EMPTY_FORM)
-  const [treatments, setTreatments] = useState([])
   const [saving, setSaving] = useState(false)
   const [deletingId, setDeletingId] = useState(null)
   const [viewItem, setViewItem] = useState(null)
@@ -77,7 +75,6 @@ export default function AdminSpecialities() {
   const openAddModal = () => {
     setEditingId(null)
     setForm({ ...EMPTY_FORM, order: specialities.length + 1 })
-    setTreatments([])
     setMedia([])
     setUploadProgress({})
     setModalOpen(true)
@@ -96,11 +93,7 @@ export default function AdminSpecialities() {
       order: spec.order ?? 0,
       doctorIds: Array.isArray(spec.doctorIds) ? spec.doctorIds : [],
     })
-    setTreatments(
-      Array.isArray(spec.treatments)
-        ? spec.treatments.map((t) => ({ ...t }))
-        : []
-    )
+
     setMedia(Array.isArray(spec.media) ? spec.media : [])
     setUploadProgress({})
     setModalOpen(true)
@@ -110,7 +103,6 @@ export default function AdminSpecialities() {
     setModalOpen(false)
     setEditingId(null)
     setForm(EMPTY_FORM)
-    setTreatments([])
     setMedia([])
     setUploadProgress({})
   }
@@ -196,15 +188,7 @@ export default function AdminSpecialities() {
   }
 
   // ── Treatment row handlers ────────────────────────────────────────────────
-  const addTreatmentRow = () => setTreatments((prev) => [...prev, { ...EMPTY_TREATMENT }])
 
-  const updateTreatmentRow = (idx, field, value) => {
-    setTreatments((prev) => prev.map((t, i) => i === idx ? { ...t, [field]: value } : t))
-  }
-
-  const removeTreatmentRow = (idx) => {
-    setTreatments((prev) => prev.filter((_, i) => i !== idx))
-  }
 
   // ── Submit ────────────────────────────────────────────────────────────────
   const handleSubmit = async (e) => {
@@ -218,10 +202,6 @@ export default function AdminSpecialities() {
         features: form.features
           ? form.features.split('\n').map((f) => f.trim()).filter(Boolean)
           : [],
-        treatments: treatments.filter((t) => t.name.trim()).map((t) => ({
-          ...t,
-          slug: slugify(t.name),
-        })),
         media,
       }
       if (editingId) {
@@ -365,11 +345,7 @@ export default function AdminSpecialities() {
                 )}
                 <div className="flex flex-wrap gap-3 mt-1.5 text-xs text-gray-400">
                   {spec.recoveryTime && <span>Recovery: {spec.recoveryTime}</span>}
-                  {Array.isArray(spec.treatments) && spec.treatments.length > 0 && (
-                    <span className="text-primary-500 font-medium flex items-center gap-1">
-                      <FiActivity size={11} /> {spec.treatments.length} treatment{spec.treatments.length !== 1 ? 's' : ''}
-                    </span>
-                  )}
+
                   {Array.isArray(spec.doctorIds) && spec.doctorIds.length > 0 && (
                     <span className="text-teal-600 font-medium flex items-center gap-1">
                       👨‍⚕️ {spec.doctorIds.length} doctor{spec.doctorIds.length !== 1 ? 's' : ''}
@@ -678,55 +654,7 @@ export default function AdminSpecialities() {
                     </div>
                   )}
 
-                  {/* ── Treatments Table ──────────────────────────────────── */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <label className="text-sm font-medium text-gray-700">
-                        Treatments / Procedures
-                        <span className="text-gray-400 font-normal ml-1">({treatments.length})</span>
-                      </label>
-                      <button type="button" onClick={addTreatmentRow}
-                        className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-primary-50 text-primary-700 hover:bg-primary-100 transition-colors font-medium">
-                        <FiPlus size={13} /> Add Row
-                      </button>
-                    </div>
 
-                    {treatments.length === 0 ? (
-                      <div className="border-2 border-dashed border-gray-100 rounded-xl p-4 text-center text-sm text-gray-400">
-                        No treatments yet — click "Add Row" to start
-                      </div>
-                    ) : (
-                      <div className="border border-gray-100 rounded-xl overflow-hidden">
-                        {/* Table header */}
-                        <div className="grid grid-cols-[1fr_110px_36px] gap-px bg-gray-100 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                          <div className="bg-gray-50 px-3 py-2">Treatment / Procedure Name</div>
-                          <div className="bg-gray-50 px-3 py-2">Duration</div>
-                          <div className="bg-gray-50 px-3 py-2" />
-                        </div>
-                        {/* Rows */}
-                        {treatments.map((t, idx) => (
-                          <div key={idx} className="grid grid-cols-[1fr_110px_36px] gap-px bg-gray-100">
-                            <div className="bg-white px-2 py-1.5">
-                              <input value={t.name} onChange={(e) => updateTreatmentRow(idx, 'name', e.target.value)}
-                                placeholder="e.g. Appendectomy"
-                                className="w-full text-sm border-0 outline-none focus:bg-primary-50 rounded px-1 py-0.5 text-gray-800 placeholder:text-gray-300" />
-                            </div>
-                            <div className="bg-white px-2 py-1.5">
-                              <input value={t.duration} onChange={(e) => updateTreatmentRow(idx, 'duration', e.target.value)}
-                                placeholder="45–60 min"
-                                className="w-full text-sm border-0 outline-none focus:bg-primary-50 rounded px-1 py-0.5 text-gray-600 placeholder:text-gray-300" />
-                            </div>
-                            <div className="bg-white flex items-center justify-center">
-                              <button type="button" onClick={() => removeTreatmentRow(idx)}
-                                className="text-gray-300 hover:text-red-500 transition-colors p-1">
-                                <FiX size={14} />
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
 
                   {/* Actions */}
                   <div className="flex gap-3 pt-2">

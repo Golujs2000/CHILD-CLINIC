@@ -204,7 +204,7 @@ export default function HospitalServices() {
                                 return slug ? (
                                   <Link
                                     key={name}
-                                    to={`/services/${slug}`}
+                                    to={`/specialities`}
                                     className="text-xs px-2.5 py-1 rounded-full bg-primary-50 text-primary-700 hover:bg-primary-100 font-medium transition-colors border border-primary-100"
                                   >
                                     {name}
@@ -262,7 +262,7 @@ export default function HospitalServices() {
               <FiPhone /> {siteData.contact.phone}
             </a>
             <Link
-              to="/services"
+              to="/specialities"
               className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-[5px] transition-colors"
             >
               View Specialities <FiArrowRight />

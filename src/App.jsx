@@ -27,9 +27,7 @@ import Gallery from './pages/Gallery'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Contact from './pages/Contact'
-import ServiceDetail from './pages/ServiceDetail'
 import HospitalServices from './pages/HospitalServices'
-import TreatmentDetail from './pages/TreatmentDetail'
 import BookAppointment from './pages/BookAppointment'
 import AppointmentSuccess from './pages/AppointmentSuccess'
 import PrivacyPolicy from './pages/PrivacyPolicy'
@@ -49,7 +47,6 @@ import AdminMessages from './pages/admin/AdminMessages'
 import AdminStaff from './pages/admin/AdminStaff'
 import AdminSpecialities from './pages/admin/AdminSpecialities'
 import AdminServices from './pages/admin/AdminServices'
-import AdminTreatments from './pages/admin/AdminTreatments'
 import AdminSettings from './pages/admin/AdminSettings'
 
 // Inner component so useVisitTracker runs inside BrowserRouter context
@@ -63,10 +60,8 @@ function AppRoutes() {
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/:slug" element={<ServiceDetail />} />
-        <Route path="/services/:slug/treatment/:treatmentSlug" element={<TreatmentDetail />} />
-        <Route path="/hospital-services" element={<HospitalServices />} />
+        <Route path="/services" element={<HospitalServices />} />
+        <Route path="/specialities" element={<Services />} />
         <Route path="/doctors" element={<Doctors />} />
         <Route path="/doctors/:id" element={<DoctorProfile />} />
         <Route path="/gallery" element={<Gallery />} />
@@ -101,7 +96,6 @@ function AppRoutes() {
         <Route path="staff" element={<ProtectedRoute requireAdmin><AdminStaff /></ProtectedRoute>} />
         <Route path="specialities" element={<AdminSpecialities />} />
         <Route path="services" element={<AdminServices />} />
-        <Route path="treatments" element={<AdminTreatments />} />
         <Route path="settings" element={<ProtectedRoute requireAdmin><AdminSettings /></ProtectedRoute>} />
       </Route>
 

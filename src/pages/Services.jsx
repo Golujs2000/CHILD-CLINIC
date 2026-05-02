@@ -47,29 +47,10 @@ const AVAIL_COLOR = {
   'By Appointment': 'bg-gray-100 text-gray-600',
 }
 
-// ── Treatment Row ─────────────────────────────────────────────────────────────
-function TreatmentRow({ t, idx }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -8 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: idx * 0.04 }}
-      className="flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0"
-    >
-      <FiCheck size={13} className="text-green-500 shrink-0" />
-      <span className="flex-1 text-sm text-gray-700">{t.name}</span>
-      {t.duration && (
-        <span className="flex items-center gap-1 text-xs text-gray-400 shrink-0">
-          <FiClock size={11} /> {t.duration}
-        </span>
-      )}
-    </motion.div>
-  )
-}
+
 
 // ── Speciality Card ───────────────────────────────────────────────────────────
 function SpecialityCard({ spec, isOpen, onToggle, colorCfg, doctors = [] }) {
-  const hasTreatments = Array.isArray(spec.treatments) && spec.treatments.length > 0
   const hasFeatures = Array.isArray(spec.features) && spec.features.length > 0
   const cfg = colorCfg || CATEGORY_CONFIG[spec.category] || CATEGORY_CONFIG['Support']
 
@@ -109,11 +90,6 @@ function SpecialityCard({ spec, isOpen, onToggle, colorCfg, doctors = [] }) {
                 <FiClock size={11} className="text-primary-400" /> {spec.recoveryTime}
               </span>
             )}
-            {hasTreatments && (
-              <span className="flex items-center gap-1 text-primary-500 font-medium">
-                <FiActivity size={11} /> {spec.treatments.length} procedure{spec.treatments.length !== 1 ? 's' : ''}
-              </span>
-            )}
           </div>
         </div>
 
@@ -149,21 +125,11 @@ function SpecialityCard({ spec, isOpen, onToggle, colorCfg, doctors = [] }) {
                 </div>
               )}
 
-              {/* Treatments table */}
-              {hasTreatments && (
-                <div className={`${hasFeatures ? '' : 'pt-4'}`}>
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Treatments & Procedures</p>
-                  <div className={`rounded-xl border ${cfg.border} bg-white px-4 py-1`}>
-                    {spec.treatments.map((t, i) => (
-                      <TreatmentRow key={i} t={t} idx={i} />
-                    ))}
-                  </div>
-                </div>
-              )}
+
 
               {/* Doctors in this speciality */}
               {doctors.length > 0 && (
-                <div className={`${hasTreatments || hasFeatures ? 'mt-4' : 'pt-4'}`}>
+                <div className={`${hasFeatures ? 'mt-4' : 'pt-4'}`}>
                   <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-1">
                     <FiUsers size={11} /> Our Doctors
                   </p>
@@ -196,13 +162,12 @@ function SpecialityCard({ spec, isOpen, onToggle, colorCfg, doctors = [] }) {
 
               {/* CTAs */}
               <div className="mt-4 flex gap-2">
-                <Link
-                  to={`/services/${spec.slug || spec.id}`}
-                  onClick={(e) => e.stopPropagation()}
+                <button
+                  onClick={onToggle}
                   className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl border ${cfg.border} ${cfg.text} text-sm font-semibold hover:${cfg.light} transition-colors`}
                 >
-                  Full Details <FiArrowRight size={13} />
-                </Link>
+                  View Highlights <FiArrowRight size={13} />
+                </button>
                 <Link
                   to="/book-appointment"
                   state={{ department: spec.name }}
@@ -243,27 +208,25 @@ export default function Services() {
   }
 
   // Stats derived from data
-  const totalTreatments = specialities.reduce(
-    (sum, s) => sum + (Array.isArray(s.treatments) ? s.treatments.length : 0), 0
-  )
+  const totalSpecialities = specialities.length
 
   return (
     <>
       <SEO
-        title="Services, Specialities & Treatments"
-        description="Explore Care Homeopathic Clinic's treatment specialities — skin diseases, women's health, kidney stone, migraine, thyroid, piles, and 200+ conditions treated in Saharsa, Bihar."
+        title="Medical Specialities & Departments"
+        description="Explore Child Clinic's medical specialities — general pediatrics, neonatology, pediatric nutrition, and specialized care for children in Saharsa, Bihar."
       />
 
       {/* Hero */}
       <section className="page-hero text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="container-max">
           <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-            Our Services & Specialities
+            Medical Specialities
           </h1>
           <p className="text-white/80 text-lg max-w-2xl mx-auto">
             {specialities.length > 0
-              ? `${specialities.length} specialities · ${totalTreatments}+ treatments — all under one roof in Saharsa`
-              : 'Comprehensive medical care across all major specialities in Saharsa, Bihar'}
+              ? `${specialities.length} specialized units providing expert pediatric care in Saharsa`
+              : 'Comprehensive medical care across all major pediatric specialities in Saharsa, Bihar'}
           </p>
         </motion.div>
       </section>

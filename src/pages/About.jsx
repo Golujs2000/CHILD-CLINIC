@@ -15,11 +15,11 @@ const LOGO = '/favicon.png'
 
 const values = [
   { icon: FiHeart,        title: 'Compassionate Care',  desc: 'Every patient is treated with empathy, dignity, and genuine concern — not just as a case, but as a person.',                              color: 'text-rose-500', bg: 'bg-rose-50', border: 'border-rose-100' },
-  { icon: FiCheckCircle,  title: 'Pure Homeopathy',     desc: 'We practice authentic constitutional homeopathy — no shortcuts, no side effects, only deep and lasting healing.',                      color: 'text-primary-600', bg: 'bg-primary-50', border: 'border-primary-100' },
+  { icon: FiCheckCircle,  title: 'Pediatric Excellence', desc: 'We provide specialized medical care for newborns and children — evidence-based, safe, and tailored to every child\'s needs.', color: 'text-primary-600', bg: 'bg-primary-50', border: 'border-primary-100' },
   { icon: FiUsers,        title: 'Patient First',       desc: 'Every decision — from prescription to scheduling — is guided by what is genuinely best for the patient.',                              color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100' },
   { icon: FiShield,       title: 'Zero Side Effects',   desc: 'Homeopathic medicines work in harmony with the body — safe for all ages, from newborns to the elderly.',                               color: 'text-teal-600', bg: 'bg-teal-50', border: 'border-teal-100' },
-  { icon: FiAward,        title: 'Clinical Excellence', desc: 'Recognised nationally and internationally for outstanding contribution to holistic and alternative medicine.',                             color: 'text-amber-500', bg: 'bg-amber-50', border: 'border-amber-100' },
-  { icon: FiStar,         title: 'Proven Results',      desc: 'Over 1,00,000 patients successfully treated across 220+ conditions — with lasting, measurable outcomes.',                               color: 'text-purple-600', bg: 'bg-purple-50', border: 'border-purple-100' },
+  { icon: FiAward,        title: 'Clinical Excellence', desc: 'Recognised for outstanding contribution to pediatric healthcare and neonatal intensive care in the region.',                             color: 'text-amber-500', bg: 'bg-amber-50', border: 'border-amber-100' },
+  { icon: FiStar,         title: 'Proven Results',      desc: 'Trusted by thousands of families for successful recoveries and healthy growth milestones in children.',                               color: 'text-purple-600', bg: 'bg-purple-50', border: 'border-purple-100' },
 ]
 
 const milestones = [
@@ -88,13 +88,13 @@ export default function About() {
                 
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="flex flex-wrap gap-2.5 mb-8">
                   <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-navy-700 bg-white border border-primary-100 px-3 py-1.5 rounded-full shadow-sm">
-                    <FiCalendar className="w-3.5 h-3.5 text-primary-500" />Est. 2001 · 25 Years
+                    <FiCalendar className="w-3.5 h-3.5 text-primary-500" />Est. 2024 · Saharsa
                   </div>
                   <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-navy-700 bg-white border border-primary-100 px-3 py-1.5 rounded-full shadow-sm">
-                    <FiShield className="w-3.5 h-3.5 text-primary-500" />Regd. No. 28291
+                    <FiShield className="w-3.5 h-3.5 text-primary-500" />7+ Years Exp.
                   </div>
                   <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-navy-700 bg-white border border-primary-100 px-3 py-1.5 rounded-full shadow-sm">
-                    <FiStar className="w-3.5 h-3.5 text-primary-500" />Saharsa's #1 Child Clinic
+                    <FiStar className="w-3.5 h-3.5 text-primary-500" />Saharsa's Trusted Child Clinic
                   </div>
                 </motion.div>
                 
@@ -114,7 +114,7 @@ export default function About() {
                   <div className="relative rounded-3xl bg-gradient-to-br from-primary-50 via-white to-accent-50/60 border-2 border-primary-100/70 shadow-2xl shadow-primary-200/30 pt-6 pb-0 px-4 mb-20">
                     <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-primary-400 rounded-tl-lg"></div>
                     <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-primary-400 rounded-tr-lg"></div>
-                    <img alt="Dr. Rajesh Kumar Ranjan" className="w-full h-auto max-h-[460px] object-contain object-bottom relative z-10" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776743194623_Dr.%20Rajesh%20Kumar%20Ranjan03%20copy.webp?alt=media&token=d7b20f39-dd98-4662-aa9e-eea01cd9f124" />
+                    <img alt="Dr. Anshuman" className="w-full h-auto max-h-[460px] object-contain object-bottom relative z-10" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776743194623_Dr.%20Rajesh%20Kumar%20Ranjan03%20copy.webp?alt=media&token=d7b20f39-dd98-4662-aa9e-eea01cd9f124" />
                     
                     <div className="absolute -bottom-[4.5rem] left-3 right-3 z-20">
                       <div className="bg-white/90 backdrop-blur-md border border-primary-100 rounded-2xl shadow-xl px-5 py-4">
@@ -140,30 +140,22 @@ export default function About() {
         {/* ── Stats ──────────────────────────────────────────────── */}
         <section className="bg-gradient-to-br from-primary-50 via-white to-accent-50 border-y border-primary-100 py-12">
           <div className="container-max px-4 md:px-8">
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }} className="text-center bg-white border border-primary-100 rounded-2xl py-5 px-3 shadow-sm">
-                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">2001</p>
+                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">2024</p>
                 <p className="text-gray-500 text-xs mt-1 font-medium">Est. Year</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-center bg-white border border-primary-100 rounded-2xl py-5 px-3 shadow-sm">
-                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">1,00,000+</p>
-                <p className="text-gray-500 text-xs mt-1 font-medium">Happy Patients</p>
+                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">500+</p>
+                <p className="text-gray-500 text-xs mt-1 font-medium">Happy Families</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-center bg-white border border-primary-100 rounded-2xl py-5 px-3 shadow-sm">
-                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">25+</p>
+                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">7+</p>
                 <p className="text-gray-500 text-xs mt-1 font-medium">Yrs Experience</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-center bg-white border border-primary-100 rounded-2xl py-5 px-3 shadow-sm">
-                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">33+</p>
-                <p className="text-gray-500 text-xs mt-1 font-medium">Specialities</p>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="text-center bg-white border border-primary-100 rounded-2xl py-5 px-3 shadow-sm">
-                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">220+</p>
-                <p className="text-gray-500 text-xs mt-1 font-medium">Conditions Treated</p>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }} className="text-center bg-white border border-primary-100 rounded-2xl py-5 px-3 shadow-sm">
-                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">10+</p>
-                <p className="text-gray-500 text-xs mt-1 font-medium">Staff Members</p>
+                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">8</p>
+                <p className="text-gray-500 text-xs mt-1 font-medium">Specialized Units</p>
               </motion.div>
             </div>
           </div>
@@ -174,7 +166,7 @@ export default function About() {
           <div className="container-max grid lg:grid-cols-2 gap-14 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="grid grid-cols-2 gap-3">
               <div className="overflow-hidden rounded-2xl row-span-2">
-                <img alt="Dr. Rajesh Kumar Ranjan" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776743472351_Dr.%20Rajesh%20Kumar%20Ranjan%2001.webp?alt=media&token=8600d364-1a08-4a48-bfe0-d4bddf5e3522" style={{ minHeight: '320px' }} />
+                <img alt="Dr. Anshuman" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776743472351_Dr.%20Rajesh%20Kumar%20Ranjan%2001.webp?alt=media&token=8600d364-1a08-4a48-bfe0-d4bddf5e3522" style={{ minHeight: '320px' }} />
               </div>
               <div className="overflow-hidden rounded-2xl">
                 <img alt="Clinic Desk" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776742720014_dr-rajesh-kumar-ranjan-at-desk-02.webp?alt=media&token=44596081-dead-4da0-af4c-415e6b62e51d" style={{ minHeight: '150px' }} />
@@ -197,10 +189,10 @@ export default function About() {
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
                 <div className="flex items-center gap-2 border rounded-full px-4 py-2 text-sm font-medium bg-green-50 border-green-200 text-green-700">
-                  <FiCheckCircle className="w-4 h-4" /> Constitutional Homeopathy
+                  <FiCheckCircle className="w-4 h-4" /> Newborn & Child Care
                 </div>
                 <div className="flex items-center gap-2 border rounded-full px-4 py-2 text-sm font-medium bg-primary-50 border-primary-200 text-primary-700">
-                  <FiHeart className="w-4 h-4" /> Skin & Women's Health
+                  <FiHeart className="w-4 h-4" /> Pediatric Nutrition
                 </div>
                 <div className="flex items-center gap-2 border rounded-full px-4 py-2 text-sm font-medium bg-blue-50 border-blue-200 text-blue-700">
                   <FiShield className="w-4 h-4" /> Zero Side Effects
@@ -266,7 +258,7 @@ export default function About() {
           <div className="container-max relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
               <span className="inline-block bg-primary-100 text-primary-700 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">Our Journey</span>
-              <h2 className="font-heading text-4xl md:text-5xl font-black text-navy-800 mt-2 leading-tight">Growing Since <span className="text-primary-600">2001</span></h2>
+              <h2 className="font-heading text-4xl md:text-5xl font-black text-navy-800 mt-2 leading-tight">Serving Since <span className="text-primary-600">2024</span></h2>
             </motion.div>
             <div className="relative max-w-3xl mx-auto">
               <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary-200 md:-translate-x-0.5"></div>

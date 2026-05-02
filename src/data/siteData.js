@@ -71,7 +71,7 @@ export const siteData = {
   // ── Homepage Stats Counter ───────────────────────────────────
   stats: [
     { label: 'Happy Families', value: 500, suffix: '+' },
-    { label: 'Years Experience', value: 12, suffix: '+' },
+    { label: 'Years Experience', value: 7, suffix: '+' },
     { label: 'Successful Recoveries', value: 450, suffix: '+' },
     { label: 'Specialized Units', value: 8, suffix: '' },
   ],
