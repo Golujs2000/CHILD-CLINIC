@@ -58,7 +58,7 @@ function AppRoutes() {
         <Route path="/specialities" element={<Services />} />
         <Route path="/specialities/:slug" element={<SpecialityDetail />} />
         <Route path="/doctors" element={<Doctors />} />
-        <Route path="/doctors/:id" element={<DoctorProfile />} />
+        <Route path="/doctors/:slug" element={<DoctorProfile />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogPost />} />

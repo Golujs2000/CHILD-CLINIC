@@ -157,6 +157,23 @@ export const seedHospitalServices = [
   },
 ]
 
+export const seedDoctors = [
+  {
+    name: 'Dr. Anshuman',
+    slug: 'dr-anshuman',
+    specialty: 'Pediatrician & Neonatologist',
+    qualification: 'P.G.P.N (BOSTON U.S.A), M.D. Pediatrics',
+    experience: '7+',
+    bio: 'Dr. Anshuman is a highly skilled Pediatrician and Neonatologist with international training from Boston, USA. He specializes in newborn care, pediatric emergencies, and childhood nutrition, bringing world-class medical expertise to Saharsa.',
+    phone: '8544037256',
+    email: 'anshuman@childclinic.com',
+    image: 'https://firebasestorage.googleapis.com/v0/b/child-clinic.firebasestorage.app/o/gallery%2F1777714740704_DR.%20ANSHUMAN01.webp?alt=media&token=27dc5999-2e10-4cd4-a081-9a71250a0a89',
+    availableDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    availableTime: '10:00 AM - 08:00 PM',
+    order: 1
+  }
+]
+
 // Clear a collection and re-seed it
 async function clearAndSeed(colName, items) {
   const snap = await getDocs(collection(db, colName))
@@ -171,7 +188,9 @@ export async function seedSpecialitiesAndServices() {
   await clearAndSeed('specialities', seedSpecialities)
   console.log('Seeding hospitalServices...')
   await clearAndSeed('hospitalServices', seedHospitalServices)
-  console.log('✅ Specialities & Services seeded!')
+  console.log('Seeding doctors...')
+  await clearAndSeed('doctors', seedDoctors)
+  console.log('✅ Specialities, Services & Doctors seeded!')
 }
 
 export async function seedFirestore() {
