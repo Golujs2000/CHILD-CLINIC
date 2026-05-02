@@ -5,18 +5,18 @@
 
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiMapPin, FiPhone, FiMail, FiCalendar, FiVideo, FiArrowRight } from 'react-icons/fi'
+import { FiMapPin, FiPhone, FiMail, FiCalendar, FiArrowRight } from 'react-icons/fi'
 import SEO from '../components/SEO'
 import { useSpecialities } from '../hooks/useSpecialities'
 import HeroSection from '../components/home/HeroSection'
 import StatsCounter from '../components/home/StatsCounter'
 import WhyChooseUs from '../components/home/WhyChooseUs'
 import ServicesSection from '../components/home/ServicesSection'
+import FacilitiesSection from '../components/home/FacilitiesSection'
 import FeaturedDoctors from '../components/home/FeaturedDoctors'
-import AppointmentForm from '../components/home/AppointmentForm'
+import DoctorHighlight from '../components/home/DoctorHighlight'
 import Testimonials from '../components/home/Testimonials'
 import BlogPreview from '../components/home/BlogPreview'
-import GalleryStrip from '../components/home/GalleryStrip'
 import { siteData } from '../data/siteData'
 
 const hospitalSchema = {
@@ -30,7 +30,7 @@ const hospitalSchema = {
   email: siteData.contact.email,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'near Dr I D Singh, Shardha Nagar',
+    streetAddress: 'near Dr I D Singh, Naya Bazar',
     addressLocality: 'Saharsa',
     addressRegion: 'Bihar',
     postalCode: '852201',
@@ -61,35 +61,12 @@ export default function Home() {
             ? specNames.map(name => ({ '@type': 'MedicalTherapy', name }))
             : hospitalSchema.availableService
         }}
-
       />
 
       {/* 1. Hero */}
       <HeroSection />
 
-      {/* Online Consultation Highlight */}
-      <section className="bg-primary-600 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
-        <div className="container-max relative z-10 py-5 md:py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4 text-center md:text-left">
-              <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shrink-0 mx-auto md:mx-0 shadow-inner">
-                <FiVideo className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="font-heading font-bold text-lg leading-tight tracking-wide">Expert Pediatric Consultation</h3>
-                <p className="text-primary-100 text-sm mt-0.5">Consult with Dr. Anshuman for your child's health concerns — now available for online sessions.</p>
-                <p className="text-yellow-200 text-xs mt-2 font-semibold bg-white/10 inline-block px-3 py-1 rounded-full border border-white/20">
-                  Note: Prior appointment is mandatory for online consultations.
-                </p>
-              </div>
-            </div>
-            <Link to="/book-appointment" className="shrink-0 bg-white text-primary-700 hover:bg-primary-50 px-6 py-2.5 rounded-full font-bold text-sm transition-colors shadow-lg shadow-black/10 flex items-center gap-2 group">
-              Book Online Session <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
+
 
       {/* 2. Stats ticker */}
       <StatsCounter />
@@ -97,54 +74,25 @@ export default function Home() {
       {/* 3. Why Choose Us */}
       <WhyChooseUs />
 
-      {/* 4. Specialities / Services */}
+      {/* 3.5. Doctor Highlight */}
+      <DoctorHighlight />
+
+      {/* 4. Specialized Pediatric Units */}
       <ServicesSection />
 
-      {/* 5. World Class Facility */}
-      <GalleryStrip />
+      {/* 5. World Class Facilities & Infrastructure */}
+      <FacilitiesSection />
 
-      {/* 6. Featured Doctors */}
+      {/* 7. Featured Doctors */}
       <FeaturedDoctors />
 
-      {/* 7. Quick Appointment Booking */}
-      <section className="relative section-padding overflow-hidden bg-white">
-        <div className="container-max">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-10"
-          >
-            <span className="inline-block bg-primary-50 border border-primary-200 text-primary-600 text-xs font-bold tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
-              Quick Booking
-            </span>
-            <h2 className="font-heading text-4xl md:text-5xl font-black text-navy-800 mt-2 leading-tight">
-              Book an Appointment{' '}
-              <span className="text-primary-600">in 60 Seconds</span>
-            </h2>
-            <p className="text-gray-500 mt-4 text-lg">
-              Our team confirms within 30 minutes · Available 7 days a week
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <AppointmentForm />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 9. Patient Testimonials */}
+      {/* 8. Patient Testimonials */}
       <Testimonials />
 
-      {/* 10. Blog / Health Tips */}
+      {/* 9. Blog / Health Tips */}
       <BlogPreview />
 
-      {/* 11. Location */}
+      {/* 10. Location */}
       <section className="section-padding bg-gradient-to-b from-slate-50 to-white">
         <div className="container-max">
           <motion.div

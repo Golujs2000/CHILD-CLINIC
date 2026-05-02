@@ -69,11 +69,11 @@ export default function Contact() {
           '@type': 'MedicalClinic',
           name: siteData.name,
           url: siteData.url,
-          telephone: `+91${siteData.contact.phone}`,
+          telephone: siteData.contact.phone,
           email: siteData.contact.email,
           address: {
             '@type': 'PostalAddress',
-            streetAddress: 'Radha Krishna Vatika, Panchwati Chowk, Ward No. 15',
+            streetAddress: 'near Dr I D Singh, Naya Bazar',
             addressLocality: 'Saharsa',
             addressRegion: 'Bihar',
             postalCode: '852201',

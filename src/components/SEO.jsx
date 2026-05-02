@@ -18,7 +18,7 @@ import { siteData } from '../data/siteData'
 /**
  * SEO head manager.
  * Props:
- *   title        — page title (appended with " | Care Homeopathic Clinic")
+ *   title        — page title (appended with " | Child Clinic")
  *   description  — meta description
  *   image        — absolute OG image URL
  *   type         — OG type: 'website' | 'article'
@@ -57,7 +57,7 @@ export default function SEO({ title, description, image, type = 'website', keywo
     email: siteData.contact.email,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Radha Krishna Vatika, Panchwati Chowk, Ward No. 15',
+      streetAddress: 'near Dr I D Singh, Naya Bazar',
       addressLocality: 'Saharsa',
       addressRegion: 'Bihar',
       postalCode: '852201',

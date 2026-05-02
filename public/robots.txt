@@ -4,4 +4,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin
 
-Sitemap: https://www.madhavhospital.in/sitemap.xml
+Sitemap: https://child-clinic.web.app/sitemap.xml

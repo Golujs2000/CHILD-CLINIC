@@ -93,7 +93,7 @@ export default function TreatmentGallery() {
             <span className="text-primary-600">Procedures</span>
           </h2>
           <p className="text-gray-500 mt-4 text-lg max-w-2xl mx-auto">
-            A glimpse into the healing environment, diagnostics, and treatments at Care Homeopathic Clinic, Panchwati Chowk, Saharsa.
+            A glimpse into the healing environment, diagnostics, and treatments at Child Clinic, Panchwati Chowk, Saharsa.
           </p>
         </motion.div>
 

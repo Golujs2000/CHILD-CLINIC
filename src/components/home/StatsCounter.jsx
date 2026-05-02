@@ -39,7 +39,8 @@ function Counter({ value, suffix, duration = 2000 }) {
 
 export default function StatsCounter() {
   return (
-    <section className="bg-navy-800 py-14">
+    <section className="bg-gradient-to-r from-navy-900 to-navy-800 py-16 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-primary-500/10 via-transparent to-transparent" />
       <div className="container-max">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

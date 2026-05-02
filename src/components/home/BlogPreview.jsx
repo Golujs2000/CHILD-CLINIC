@@ -7,24 +7,24 @@ import { formatDate } from '../../utils/helpers'
 const FALLBACK_POSTS = [
   {
     id: 'b1',
-    title: 'Kidney Stones: Can Homeopathy Dissolve Them Without Surgery?',
-    excerpt: 'Kidney stones are one of the most painful conditions. Discover how homeopathic medicines like Berberis Vulgaris help dissolve stones and prevent recurrence.',
-    category: 'Kidney & Urinary',
+    title: 'Importance of timely Vaccinations: A Guide for Parents',
+    excerpt: 'Vaccinations are the most effective way to protect your child from serious diseases. Learn about the IAP recommended schedule and cold-chain safety.',
+    category: 'Preventive Care',
     date: '19 Apr 2026',
     color: 'from-primary-400 to-accent-600',
   },
   {
     id: 'b2',
-    title: 'PCOS & Menstrual Disorders: A Homeopathic Perspective',
-    excerpt: 'Millions of women suffer from PCOS and irregular periods. Dr. Rajesh Kumar Ranjan shares how homeopathy offers a hormone-free, natural solution.',
-    category: 'Women\'s Health',
+    title: 'Newborn Care: Essential Tips for the First 28 Days',
+    excerpt: 'The neonatal period is a critical time for your baby. Dr. Anshuman shares essential tips for maintaining newborn health, safety, and nutrition.',
+    category: 'Neonatology',
     date: '19 Apr 2026',
   },
   {
     id: 'b3',
-    title: 'Homeopathy for Skin Diseases: Eczema, Psoriasis & Vitiligo',
-    excerpt: 'Dr. Rajesh Kumar Ranjan explains how constitutional homeopathy provides lasting relief for chronic skin conditions without steroids or harsh chemicals.',
-    category: 'Skin Diseases',
+    title: 'Pediatric Nutrition: Building a Strong Foundation for Growth',
+    excerpt: 'Dr. Anshuman explains how proper nutrition and growth monitoring can prevent long-term health issues and ensure your child reaches every milestone.',
+    category: 'Child Nutrition',
     date: '19 Apr 2026',
   },
 ]

@@ -14,7 +14,7 @@ import { FiX, FiImage, FiCheck } from 'react-icons/fi'
 import { getGallery } from '../../services/gallery'
 
 const LOCAL_PHOTOS = [
-  { id: 'l1', image: '/gallery/hospital-1.jpg', title: 'Care Homeopathic Clinic' },
+  { id: 'l1', image: '/gallery/hospital-1.jpg', title: 'Child Clinic' },
   { id: 'l2', image: '/gallery/hospital-2.jpg', title: 'Hospital Building' },
   { id: 'l3', image: '/gallery/hospital-3.jpg', title: 'Medical Facility' },
   { id: 'l4', image: '/gallery/hospital-4.jpg', title: 'Patient Care' },

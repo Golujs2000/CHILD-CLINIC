@@ -25,13 +25,13 @@ export default function Doctors() {
     <>
       <SEO
         title="Our Doctors"
-        description="Meet the Homoeopathic Consultant at Care Homeopathic Clinic, Saharsa — Dr. Rajesh Kumar Ranjan (B.H.M.S.). View profiles and book appointments online."
-        keywords={['doctors in Saharsa', 'best surgeon Saharsa', 'gynaecologist Saharsa', 'specialist doctor Bihar', 'Dr Amit Anand', 'Dr Kumari Sneha']}
+        description="Meet Dr. Anshuman, expert Pediatrician and Neonatologist at Child Clinic, Saharsa. View profiles and book appointments online for specialized child care."
+        keywords={['child specialist Saharsa', 'best pediatrician Saharsa Bihar', 'newborn specialist Saharsa', 'Dr. Anshuman Saharsa', 'pediatric clinic Bihar']}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
-          name: 'Doctors at Care Homeopathic Clinic',
-          description: 'Meet Dr. Rajesh Kumar Ranjan and the team at Care Homeopathic Clinic, Saharsa, Bihar.',
+          name: 'Doctors at Child Clinic',
+          description: 'Meet Dr. Anshuman and the expert pediatric team at Child Clinic, Saharsa, Bihar.',
           url: `${siteData.url}/doctors`,
         }}
       />
@@ -41,7 +41,7 @@ export default function Doctors() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="container-max">
           <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">Our Expert Doctors</h1>
           <p className="text-white/80 text-lg max-w-2xl mx-auto">
-            80+ highly qualified specialists committed to your health and recovery.
+            Dedicated pediatric specialists committed to your child's health and recovery.
           </p>
         </motion.div>
       </section>

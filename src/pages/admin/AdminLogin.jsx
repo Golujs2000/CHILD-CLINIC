@@ -95,13 +95,17 @@ export default function AdminLogin() {
         <div className="card p-8">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-primary-600 flex items-center justify-center shadow-lg mb-4">
-              <span className="text-white font-bold text-2xl">MH</span>
+            <div className="mb-4">
+              <img
+                src="/child-clinic-logo.png"
+                alt="Child Clinic Logo"
+                className="w-20 h-20 object-contain drop-shadow-xl"
+              />
             </div>
             <h1 className="text-2xl font-bold text-navy-800">
               {resetMode ? 'Reset Password' : 'Admin Login'}
             </h1>
-            <p className="text-gray-500 text-sm mt-1">Care Homeopathic Clinic Admin</p>
+            <p className="text-gray-500 text-sm mt-1">Child Clinic Admin</p>
           </div>
 
           {/* Error */}
@@ -219,7 +223,7 @@ export default function AdminLogin() {
         </div>
 
         <p className="text-center text-white/50 text-xs mt-6">
-          © {new Date().getFullYear()} Care Homeopathic Clinic. All rights reserved.
+          © {new Date().getFullYear()} Child Clinic. All rights reserved.
         </p>
       </motion.div>
     </div>

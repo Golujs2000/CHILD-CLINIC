@@ -1,33 +1,71 @@
-// Seed data for Care Homeopathic Clinic — initial Firestore population
+// Seed data for Child Clinic — initial Firestore population
 // Run seedFirestore() in browser console after importing
 
 import { db } from '../firebase/config'
 import { collection, addDoc, getDocs, deleteDoc, serverTimestamp } from 'firebase/firestore'
 
-export const seedDoctors = [
+export const seedSpecialities = [
   {
-    name: 'Dr. Anshuman',
-    specialty: 'Pediatrician & Neonatologist',
-    qualification: 'M.B.B.S (PMCH Patna), D.C.H (PMCH Patna), M.D Pediatric (PMCH Patna), P.G.P.N (Boston U.S.A)',
-    experience: 7,
-    bio: 'Dr. Anshuman is a highly qualified Pediatrician and Neonatologist with over 7 years of experience in saving and nurturing young lives. He is dedicated to providing evidence-based, compassionate care for children of all ages. Previously, he served as a Senior Resident at I.G.I.M.S PATNA and as a Consultant at Mahavir Vatsalya Hospital Patna.',
-    image: '',
-    email: 'dranshuman@childclinic.com',
-    phone: '6201592231',
-    consultationFee: 300,
-    availableDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    availableTime: '10:00 AM – 7:00 PM',
-    specializations: ['Pediatric Nutrition', 'Growth & Development', 'General Pediatrics', 'Neonatology'],
-    hindiTitle: 'बाल रोग विशेषज्ञ एवं नवजात शिशु विशेषज्ञ',
-    rating: 4.9,
-    reviewCount: 150,
-    featured: true,
+    name: 'General Pediatrics',
+    slug: 'general-pediatrics',
+    category: 'Specialized Unit',
+    icon: '👶',
+    description: 'Expert healthcare for infants, children, and adolescents. Our general pediatric services cover everything from routine wellness checkups to the diagnosis and treatment of acute and chronic illnesses. Dr. Anshuman provides personalized care to ensure your child stays on the right track for healthy development.',
+    available: 'OPD Hours',
+    features: ['Common Cold & Fever', 'Infection Management', 'Growth Assessments', 'Routine Wellness'],
+    order: 0
   },
+  {
+    name: 'Neonatology (NICU)',
+    slug: 'neonatology-nicu',
+    category: 'Specialized Unit',
+    icon: '🏥',
+    description: 'Specialized medical care for newborn infants, particularly those who are ill or born prematurely. Our Level II NICU is equipped with advanced technology including incubators and phototherapy units to manage neonatal jaundice, respiratory distress, and low birth weight complications.',
+    available: '24 × 7',
+    features: ['Level II NICU', 'Premature Baby Care', 'Neonatal Jaundice', 'Respiratory Support'],
+    order: 1
+  },
+  {
+    name: 'Vaccination Centre',
+    slug: 'vaccination-centre',
+    category: 'Specialized Unit',
+    icon: '💉',
+    description: 'A comprehensive immunization facility following the latest national and international guidelines (IAP/WHO). We maintain a strict cold-chain for all vaccines to ensure maximum potency. From painless vaccinations to complete immunization record management, we provide a safe environment for your child.',
+    available: 'OPD Hours',
+    features: ['Painless Vaccines', 'IAP Schedule Following', 'Cold-Chain Security', 'Digital Records'],
+    order: 2
+  },
+  {
+    name: 'Pediatric Emergency',
+    slug: 'pediatric-emergency',
+    category: 'Specialized Unit',
+    icon: '🚨',
+    description: 'Round-the-clock emergency services dedicated to critical pediatric cases. Our unit is prepared to handle acute medical situations such as high-grade fever, seizures, severe dehydration, breathing difficulties, and accidental ingestions with immediate specialist intervention.',
+    available: '24 × 7',
+    features: ['Acute Illness Care', 'Trauma Support', '24/7 Specialist Availability', 'Oxygen Therapy'],
+    order: 3
+  },
+  {
+    name: 'Pediatric Nutrition & Growth',
+    slug: 'nutrition-growth',
+    category: 'Specialized Unit',
+    icon: '🥗',
+    description: 'Focused on the nutritional well-being and physical development of children. We provide detailed assessments of growth milestones, weight management, and specialized diet planning for picky eaters, malnourished children, or those with metabolic concerns.',
+    available: 'OPD Hours',
+    features: ['Dietary Planning', 'Milestone Tracking', 'Obesity Management', 'Vitamins & Supplements'],
+    order: 4
+  },
+  {
+    name: 'Pediatric Pulmonology',
+    slug: 'pediatric-pulmonology',
+    category: 'Specialized Unit',
+    icon: '🌬️',
+    description: 'Expert diagnosis and management of respiratory conditions in children. We specialize in treating pediatric asthma, recurring bronchitis, pneumonia, and allergies, ensuring your child breathes easy and stays active.',
+    available: 'OPD Hours',
+    features: ['Asthma Management', 'Nebulization Services', 'Allergy Testing', 'Bronchitis Care'],
+    order: 5
+  }
 ]
-
-import { allSpecialities } from './seed/index.js'
-
-export const seedSpecialities = allSpecialities
 
 export const seedBlogs = [
   {
@@ -59,6 +97,7 @@ export const seedBlogs = [
 export const seedHospitalServices = [
   {
     name: 'Pediatric OPD',
+    slug: 'pediatric-opd',
     icon: '👶',
     category: 'Department',
     available: 'OPD Hours',
@@ -68,42 +107,47 @@ export const seedHospitalServices = [
   },
   {
     name: 'NICU & Newborn Care',
+    slug: 'nicu-newborn-care',
     icon: '🏥',
     category: 'Emergency',
     available: '24 × 7',
     description: 'Advanced NICU facility for premature babies, low birth weight newborns, neonatal jaundice, and birth-related complications. Round-the-clock specialist monitoring with incubators, phototherapy, and IV support.',
-    relatedSpecialties: ['Neonatology (Newborn Care)'],
+    relatedSpecialties: ['Neonatology (NICU)'],
     order: 2,
   },
   {
     name: 'Vaccination Centre',
+    slug: 'vaccination-centre-service',
     icon: '💉',
     category: 'Diagnostic',
     available: 'OPD Hours',
     description: 'Complete childhood vaccination services following IAP and WHO schedules. All vaccines available including BCG, OPV, DPT, MMR, Hepatitis B, PCV, Typhoid, and Chickenpox. Cold-chain maintained with digital records.',
-    relatedSpecialties: ['Vaccinations & Immunizations'],
+    relatedSpecialties: ['Vaccination Centre'],
     order: 3,
   },
   {
     name: 'Pediatric Emergency',
+    slug: 'pediatric-emergency-service',
     icon: '🚨',
     category: 'Emergency',
     available: '24 × 7',
     description: 'Round-the-clock emergency pediatric services for seizures, high fever, breathing difficulty, severe dehydration, accidental poisoning, and any other pediatric emergencies requiring immediate attention.',
-    relatedSpecialties: ['General Pediatrics', 'Neonatology (Newborn Care)', 'Pediatric Pulmonology'],
+    relatedSpecialties: ['General Pediatrics', 'Neonatology (NICU)', 'Pediatric Pulmonology'],
     order: 4,
   },
   {
     name: 'In-Clinic Pathology Lab',
+    slug: 'pathology-lab',
     icon: '🔬',
     category: 'Diagnostic',
     available: '24 × 7',
     description: 'In-house blood and urine testing facility for rapid diagnosis without leaving the clinic. Supports CBC, blood culture, bilirubin, blood glucose, urine routine, and malaria/dengue rapid tests.',
-    relatedSpecialties: ['General Pediatrics', 'Neonatology (Newborn Care)'],
+    relatedSpecialties: ['General Pediatrics', 'Neonatology (NICU)'],
     order: 5,
   },
   {
     name: 'Pharmacy',
+    slug: 'pharmacy',
     icon: '💊',
     category: 'Support',
     available: '24 × 7',
@@ -111,13 +155,6 @@ export const seedHospitalServices = [
     relatedSpecialties: [],
     order: 6,
   },
-]
-
-export const seedGallery = [
-  { title: 'Care Homeopathic Clinic', category: 'facility', image: '/gallery/clinic-1.jpg', description: 'Care Homeopathic Clinic, Radha Krishna Vatika, Panchwati Chowk, Ward No. 15, Saharsa' },
-  { title: 'Clinic Entrance', category: 'facility', image: '/gallery/clinic-2.jpg', description: 'Welcoming clinic environment' },
-  { title: 'Consultation Room', category: 'facility', image: '/gallery/clinic-3.jpg', description: 'Private consultation room for detailed case taking' },
-  { title: 'Medicine Counter', category: 'facility', image: '/gallery/clinic-4.jpg', description: 'In-house medicine dispensary' },
 ]
 
 // Clear a collection and re-seed it
@@ -139,19 +176,9 @@ export async function seedSpecialitiesAndServices() {
 
 export async function seedFirestore() {
   try {
-    console.log('Seeding doctors...')
-    for (const doc of seedDoctors) {
-      await addDoc(collection(db, 'doctors'), { ...doc, createdAt: serverTimestamp() })
-    }
-
     console.log('Seeding blogs...')
     for (const doc of seedBlogs) {
       await addDoc(collection(db, 'blogs'), { ...doc, createdAt: serverTimestamp() })
-    }
-
-    console.log('Seeding gallery...')
-    for (const doc of seedGallery) {
-      await addDoc(collection(db, 'gallery'), { ...doc, createdAt: serverTimestamp() })
     }
 
     console.log('✅ Seeding complete!')

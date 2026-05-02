@@ -18,12 +18,12 @@ export default function BookAppointment() {
     <>
       <SEO
         title="Book an Appointment"
-        description="Book a homeopathic appointment at Care Homeopathic Clinic, Saharsa online. Choose your department, select a date, and our team confirms within 30 minutes. Consultation by appointment."
-        keywords={['book appointment homeopathy Saharsa', 'online appointment homeopathy Saharsa', 'doctor appointment Bihar', 'Care Homeopathic Clinic appointment']}
+        description="Book a homeopathic appointment at Child Clinic, Saharsa online. Choose your department, select a date, and our team confirms within 30 minutes. Consultation by appointment."
+        keywords={['book appointment homeopathy Saharsa', 'online appointment homeopathy Saharsa', 'doctor appointment Bihar', 'Child Clinic appointment']}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'ReserveAction',
-          name: 'Book an Appointment at Care Homeopathic Clinic',
+          name: 'Book an Appointment at Child Clinic',
           target: {
             '@type': 'EntryPoint',
             urlTemplate: `${siteData.url}/book-appointment`,

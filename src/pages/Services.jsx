@@ -162,12 +162,12 @@ function SpecialityCard({ spec, isOpen, onToggle, colorCfg, doctors = [] }) {
 
               {/* CTAs */}
               <div className="mt-4 flex gap-2">
-                <button
-                  onClick={onToggle}
+                <Link
+                  to={`/specialities/${spec.slug}`}
                   className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl border ${cfg.border} ${cfg.text} text-sm font-semibold hover:${cfg.light} transition-colors`}
                 >
-                  View Highlights <FiArrowRight size={13} />
-                </button>
+                  View Details <FiArrowRight size={13} />
+                </Link>
                 <Link
                   to="/book-appointment"
                   state={{ department: spec.name }}

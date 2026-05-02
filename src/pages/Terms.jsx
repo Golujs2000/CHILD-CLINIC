@@ -5,7 +5,7 @@ import { siteData } from '../data/siteData'
 const sections = [
   {
     title: '1. Acceptance of Terms',
-    content: 'By accessing and using the Care Homeopathic Clinic website, you accept and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our website.',
+    content: 'By accessing and using the Child Clinic website, you accept and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our website.',
   },
   {
     title: '2. Medical Disclaimer',
@@ -17,11 +17,11 @@ const sections = [
   },
   {
     title: '4. Intellectual Property',
-    content: 'All content on this website, including text, images, logos, and graphics, is the property of Care Homeopathic Clinic and protected by copyright law. You may not reproduce, distribute, or use our content without prior written permission.',
+    content: 'All content on this website, including text, images, logos, and graphics, is the property of Child Clinic and protected by copyright law. You may not reproduce, distribute, or use our content without prior written permission.',
   },
   {
     title: '5. Limitation of Liability',
-    content: 'Care Homeopathic Clinic shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of this website or our services, to the maximum extent permitted by applicable law.',
+    content: 'Child Clinic shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of this website or our services, to the maximum extent permitted by applicable law.',
   },
   {
     title: '6. Privacy',
@@ -48,7 +48,7 @@ const sections = [
 export default function Terms() {
   return (
     <>
-      <SEO title="Terms & Conditions" description="Read Care Homeopathic Clinic's terms and conditions for using our website and services." />
+      <SEO title="Terms & Conditions" description="Read Child Clinic's terms and conditions for using our website and services." />
 
       <section className="page-hero text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="container-max">

@@ -8,7 +8,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { doc, getDoc } from 'firebase/firestore'
+import { collection, query, where, getDocs } from 'firebase/firestore'
 import { motion } from 'framer-motion'
 import {
   FiPhone, FiMail, FiClock, FiCalendar,
@@ -23,34 +23,29 @@ import { siteData } from '../data/siteData'
 const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 export default function DoctorProfile() {
-  const { id } = useParams()
-  const [doctor, setDoctor]           = useState(null)
-  const [loading, setLoading]         = useState(true)
-  const [linkedGroups, setLinkedGroups] = useState([])
+  const { slug } = useParams()
+  const [doctor, setDoctor] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getDoc(doc(db, 'doctors', id))
-      .then((snap) => {
-        if (snap.exists()) setDoctor({ id: snap.id, ...snap.data() })
-      })
-      .catch(console.error)
-      .finally(() => setLoading(false))
-  }, [id])
+    const fetchDoctor = async () => {
+      setLoading(true)
+      try {
+        const q = query(collection(db, 'doctors'), where('slug', '==', slug))
+        const snap = await getDocs(q)
+        if (!snap.empty) {
+          setDoctor({ id: snap.docs[0].id, ...snap.docs[0].data() })
+        }
+      } catch (err) {
+        console.error('Fetch doctor error:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchDoctor()
+  }, [slug])
 
-  // Build linked-treatment groups once doctor + specialities are loaded
-  useEffect(() => {
-    if (!doctor?.linkedTreatments?.length) return
-    getSpecialities().then((specs) => {
-      const groups = []
-      specs.forEach((spec) => {
-        const matched = (spec.treatments || []).filter((t) =>
-          doctor.linkedTreatments.includes(`${spec.id}::${t.slug}`)
-        )
-        if (matched.length) groups.push({ spec, treatments: matched })
-      })
-      setLinkedGroups(groups)
-    }).catch(console.error)
-  }, [doctor])
+
 
   if (loading) {
     return (
@@ -77,7 +72,7 @@ export default function DoctorProfile() {
     <>
       <SEO
         title={doctor.name}
-        description={`${doctor.name} – ${doctor.specialty} specialist at Care Homeopathic Clinic, Saharsa. ${doctor.experience} years of experience. ${doctor.qualification}. Book an appointment today.`}
+        description={`${doctor.name} – ${doctor.specialty} specialist at Child Clinic, Saharsa. ${doctor.experience} years of experience. ${doctor.qualification}. Contact us today.`}
         keywords={[doctor.name, doctor.specialty, `${doctor.specialty} doctor Saharsa`, `${doctor.specialty} specialist Bihar`]}
         jsonLd={[
           {
@@ -173,10 +168,10 @@ export default function DoctorProfile() {
                 </div>
 
                 <Link
-                  to={`/book-appointment?dept=${encodeURIComponent(doctor.specialty)}&doctor=${encodeURIComponent(doctor.name)}`}
+                  to="/contact"
                   className="btn-primary w-full justify-center"
                 >
-                  <FiCalendar /> Book Appointment
+                  <FiPhone /> Contact Us
                 </Link>
               </div>
             </motion.div>
@@ -235,49 +230,19 @@ export default function DoctorProfile() {
                 </div>
               </div>
 
-              {/* Linked Treatments */}
-              {linkedGroups.length > 0 && (
-                <div className="card p-8">
-                  <h2 className="font-heading font-bold text-navy-800 text-xl mb-5 flex items-center gap-2">
-                    <FiActivity className="w-5 h-5 text-primary-500" /> Treatments &amp; Procedures
-                  </h2>
-                  <div className="space-y-5">
-                    {linkedGroups.map(({ spec, treatments }) => (
-                      <div key={spec.id}>
-                        <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">
-                          {spec.icon && <span className="mr-1">{spec.icon}</span>}{spec.name}
-                        </p>
-                        <div className="grid sm:grid-cols-2 gap-2">
-                          {treatments.map((t) => (
-                            <Link
-                              key={t.slug}
-                              to={`/services/${spec.slug}/treatment/${t.slug}`}
-                              className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-primary-50 hover:bg-primary-100 transition-colors group"
-                            >
-                              <div>
-                                <p className="text-sm font-semibold text-navy-800 group-hover:text-primary-700">{t.name}</p>
-                              </div>
-                              <FiChevronRight size={16} className="text-primary-400 group-hover:text-primary-600 flex-shrink-0" />
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
-              {/* Book CTA */}
+
+              {/* Contact CTA */}
               <div className="bg-hero-gradient rounded-2xl p-8 text-white">
-                <h3 className="font-heading font-bold text-xl mb-3">Ready to Book an Appointment?</h3>
+                <h3 className="font-heading font-bold text-xl mb-3">Have a Question?</h3>
                 <p className="text-white/80 text-sm mb-5">
-                  Schedule a consultation with {doctor.name}. Our team will confirm within 30 minutes.
+                  Reach out to {doctor.name} and our team for any medical inquiries or consultation requests.
                 </p>
                 <Link
-                  to={`/book-appointment?dept=${encodeURIComponent(doctor.specialty)}&doctor=${encodeURIComponent(doctor.name)}`}
+                  to="/contact"
                   className="btn-accent inline-flex"
                 >
-                  <FiCalendar /> Book Now
+                  <FiPhone /> Contact for Inquiry
                 </Link>
               </div>
             </motion.div>

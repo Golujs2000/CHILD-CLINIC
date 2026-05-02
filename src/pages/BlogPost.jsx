@@ -162,7 +162,7 @@ export default function BlogPost() {
                   </div>
                 </div>
                 <p className="text-gray-500 text-xs leading-relaxed mb-4">
-                  Homeopathic physician at Care Homeopathic Clinic specialising in {post.category}.
+                  Homeopathic physician at Child Clinic specialising in {post.category}.
                 </p>
                 <Link to="/book-appointment" className="btn-primary text-sm py-2.5 w-full justify-center">
                   Book Consultation

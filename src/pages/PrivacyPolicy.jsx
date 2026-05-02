@@ -44,7 +44,7 @@ const sections = [
 export default function PrivacyPolicy() {
   return (
     <>
-      <SEO title="Privacy Policy" description="Read Care Homeopathic Clinic's privacy policy to understand how we collect, use, and protect your personal information." />
+      <SEO title="Privacy Policy" description="Read Child Clinic's privacy policy to understand how we collect, use, and protect your personal information." />
 
       <section className="page-hero text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="container-max">

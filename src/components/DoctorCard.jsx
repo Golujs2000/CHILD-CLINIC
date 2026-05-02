@@ -116,16 +116,10 @@ export default function DoctorCard({ doc, accent }) {
 
         <div className="flex gap-2 mt-auto">
           <Link
-            to={`/doctors/${doc.id}`}
-            className={`flex-1 text-center py-2.5 rounded-xl text-sm font-semibold transition-colors ${c.viewBtn}`}
+            to={`/doctors/${doc.slug || doc.id}`}
+            className={`w-full text-center py-2.5 rounded-xl text-sm font-semibold transition-colors ${c.viewBtn}`}
           >
             View Profile
-          </Link>
-          <Link
-            to={`/book-appointment?doctor=${encodeURIComponent(doc.name)}&dept=${encodeURIComponent(doc.specialty)}`}
-            className={`flex-1 text-center py-2.5 text-white rounded-xl text-sm font-semibold transition-colors shadow-md ${c.bookBtn}`}
-          >
-            Book Appointment
           </Link>
         </div>
       </div>

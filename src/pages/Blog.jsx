@@ -35,7 +35,7 @@ export default function Blog() {
     <>
       <SEO
         title="Health Blog"
-        description="Read expert health tips, medical guides, and patient stories from Dr. Rajesh Kumar Ranjan at Care Homeopathic Clinic."
+        description="Read expert pediatric health tips, newborn care guides, and medical insights from Dr. Anshuman at Child Clinic, Saharsa."
       />
 
       {/* Hero */}

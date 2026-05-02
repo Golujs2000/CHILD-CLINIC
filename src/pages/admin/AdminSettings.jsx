@@ -18,7 +18,7 @@ import { getSettings, updateSettings } from '../../services/settings'
 import { seedSpecialitiesAndServices, seedFirestore } from '../../data/seedData'
 
 const EMPTY_FORM = {
-  siteName: 'Care Homeopathic Clinic',
+  siteName: 'Child Clinic',
   tagline: 'Your Health, Our Priority',
   phone: '',
   emergencyPhone: '',
@@ -33,7 +33,7 @@ const FIELD_GROUPS = [
     title: 'Site Identity',
     icon: FiGlobe,
     fields: [
-      { name: 'siteName', label: 'Site Name', placeholder: 'Care Homeopathic Clinic', icon: FiGlobe },
+      { name: 'siteName', label: 'Site Name', placeholder: 'Child Clinic', icon: FiGlobe },
       { name: 'tagline', label: 'Tagline', placeholder: 'Your Health, Our Priority', icon: FiGlobe },
     ],
   },
@@ -43,16 +43,16 @@ const FIELD_GROUPS = [
     fields: [
       { name: 'phone', label: 'Contact Phone', placeholder: '+91 98765 43210', icon: FiPhone },
       { name: 'emergencyPhone', label: 'Emergency Phone', placeholder: '+91 98765 00000', icon: FiPhone },
-      { name: 'email', label: 'Email Address', placeholder: 'info@carehomeopathicclinic.com', icon: FiMail, type: 'email' },
-      { name: 'address', label: 'Address', placeholder: '123 Health St, City, State', icon: FiMapPin },
+      { name: 'email', label: 'Email Address', placeholder: 'contact@childclinic.com', icon: FiMail, type: 'email' },
+      { name: 'address', label: 'Address', placeholder: 'near Dr I D Singh, Naya Bazar, Saharsa', icon: FiMapPin },
     ],
   },
   {
     title: 'Social Media',
     icon: FiGlobe,
     fields: [
-      { name: 'facebookUrl', label: 'Facebook URL', placeholder: 'https://facebook.com/carehomeopathicclinic', icon: FiFacebook },
-      { name: 'instagramUrl', label: 'Instagram URL', placeholder: 'https://instagram.com/carehomeopathicclinic', icon: FiInstagram },
+      { name: 'facebookUrl', label: 'Facebook URL', placeholder: 'https://facebook.com/childclinicsaharsa', icon: FiFacebook },
+      { name: 'instagramUrl', label: 'Instagram URL', placeholder: 'https://instagram.com/childclinicsaharsa', icon: FiInstagram },
     ],
   },
 ]
@@ -84,7 +84,7 @@ export default function AdminSettings() {
   }
 
   const handleSeedClinical = async () => {
-    if (!window.confirm('WARNING: This will RESET all 28 Specialities and 230 Treatments to their factory defaults. Any manual changes to categories or treatments will be LOST. Continue?')) return
+    if (!window.confirm('WARNING: This will RESET all Specialities and Hospital Services to their factory defaults. Any manual changes to categories or descriptions will be LOST. Continue?')) return
     setSeedingClinical(true)
     try {
       await seedSpecialitiesAndServices()
@@ -248,7 +248,7 @@ export default function AdminSettings() {
                     <><FiDatabase size={15} /> Refresh Clinical Dataset</>
                   )}
                 </button>
-                <p className="text-[10px] text-gray-400 italic">Resets 28 Specialities & 230 Treatments. Overwrites existing data.</p>
+                <p className="text-[10px] text-gray-400 italic">Resets Specialities & Hospital Services. Overwrites existing data.</p>
               </div>
 
               {/* Full Site Reset Button */}

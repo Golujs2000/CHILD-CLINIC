@@ -18,10 +18,10 @@ import { FiArrowRight, FiImage, FiX, FiChevronLeft, FiChevronRight } from 'react
 import { getGalleryByFolderName } from '../../services/gallery'
 
 const STATS = [
-  { value: '1,00,000+', label: 'Happy Patients' },
-  { value: '25+',       label: 'Years Experience' },
-  { value: '33+',       label: 'Specialities' },
-  { value: '220+',      label: 'Conditions Treated' },
+  { value: '1000+',  label: 'Happy Families' },
+  { value: '1000+',  label: 'Newborns Cared For' },
+  { value: '100+',   label: 'Vaccinations Done' },
+  { value: '7+',     label: 'Years Experience' },
 ]
 
 // ── Lightbox ──────────────────────────────────────────────────────────────────
@@ -112,7 +112,7 @@ const cleanTitle = (title = '') =>
     .replace(/[-_\s]+\d+$/, '')
     .replace(/[-_]/g, ' ')
     .trim()
-    .replace(/\b\w/g, (c) => c.toUpperCase()) || 'Care Homeopathic Clinic'
+    .replace(/\b\w/g, (c) => c.toUpperCase()) || 'Child Clinic'
 
 // ── Tiles ─────────────────────────────────────────────────────────────────────
 function PlaceholderTile({ className = '' }) {
@@ -132,7 +132,7 @@ function ImgTile({ img, className = '', large = false, onClick }) {
     >
       <img
         src={img.image}
-        alt={img.title || 'Care Homeopathic Clinic'}
+        alt={img.title || 'Child Clinic'}
         className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ${large ? 'duration-1000' : ''}`}
         loading="lazy"
       />
@@ -157,10 +157,20 @@ export default function GalleryStrip() {
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
   useEffect(() => {
-    getGalleryByFolderName('home gallery')
-      .then(setImages)
-      .catch(console.error)
-      .finally(() => setLoading(false))
+    // Attempt to fetch from folders in order of relevance
+    const fetchInfrastructure = async () => {
+      try {
+        let imgs = await getGalleryByFolderName('Infrastructure')
+        if (imgs.length === 0) imgs = await getGalleryByFolderName('Clinic')
+        if (imgs.length === 0) imgs = await getGalleryByFolderName('home gallery')
+        setImages(imgs)
+      } catch (err) {
+        console.error('Gallery fetch error:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchInfrastructure()
   }, [])
 
   const openLightbox = (index) => setLightboxIndex(index)
@@ -193,7 +203,7 @@ export default function GalleryStrip() {
               Modern Clinic <span className="text-primary-600">Infrastructure</span>
             </h2>
             <p className="text-gray-500 text-lg leading-relaxed">
-              Care Homeopathic Clinic provides a calm, welcoming environment designed for your comfort. Our infrastructure is optimized for focused consultation and effective homeopathic healing.
+              Child Clinic provides a calm, welcoming environment designed for your comfort. Our infrastructure is optimized for focused consultation and effective homeopathic healing.
             </p>
           </motion.div>
 
@@ -247,7 +257,7 @@ export default function GalleryStrip() {
                     <>
                       <img
                         src={img.image}
-                        alt={img.title || 'Care Homeopathic Clinic'}
+                        alt={img.title || 'Child Clinic'}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />

@@ -204,7 +204,7 @@ export default function HospitalServices() {
                                 return slug ? (
                                   <Link
                                     key={name}
-                                    to={`/specialities`}
+                                    to={`/specialities/${slug}`}
                                     className="text-xs px-2.5 py-1 rounded-full bg-primary-50 text-primary-700 hover:bg-primary-100 font-medium transition-colors border border-primary-100"
                                   >
                                     {name}
@@ -218,6 +218,16 @@ export default function HospitalServices() {
                             </div>
                           </div>
                         )}
+
+                        {/* Footer link */}
+                        <div className="mt-auto pt-4 border-t border-gray-50">
+                          <Link 
+                            to={`/services/${svc.slug}`} 
+                            className={`inline-flex items-center gap-1.5 text-sm font-bold ${cfg.text} hover:translate-x-1 transition-transform`}
+                          >
+                            View Facility Details <FiArrowRight size={14} />
+                          </Link>
+                        </div>
                       </motion.div>
                     )
                   })}

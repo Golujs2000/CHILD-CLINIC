@@ -108,7 +108,7 @@ export default function Gallery() {
     <>
       <SEO
         title="Gallery"
-        description="Explore Care Homeopathic Clinic's welcoming facility, diagnostic equipment, and clinic environment through our photo gallery."
+        description="Explore Child Clinic's welcoming facility, diagnostic equipment, and clinic environment through our photo gallery."
       />
 
       {/* Hero */}

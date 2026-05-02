@@ -14,7 +14,6 @@ import {
   FiPhone, FiMail, FiMapPin, FiClock, FiChevronRight, FiUser,
 } from 'react-icons/fi'
 import { siteData } from '../data/siteData'
-import { useSpecialities } from '../hooks/useSpecialities'
 import { useDoctors } from '../hooks/useDoctors'
 
 const quickLinks = [
@@ -23,7 +22,6 @@ const quickLinks = [
   { label: 'Our Doctors',       to: '/doctors' },
   { label: 'Clinic Services',   to: '/services' },
   { label: 'Specialities',      to: '/specialities' },
-  { label: 'Book Appointment',  to: '/book-appointment' },
   { label: 'Contact',           to: '/contact' },
 ]
 
@@ -41,24 +39,8 @@ const socialIcons = {
   linkedin:  FiLinkedin,
 }
 
-// Category accent colours for speciality headers
-const catColor = {
-  'General':     'text-blue-400 border-blue-400/40',
-  'Skin':        'text-teal-400 border-teal-400/40',
-  'Digestive':   'text-green-400 border-green-400/40',
-  'Respiratory': 'text-sky-400 border-sky-400/40',
-  'Women':       'text-pink-400 border-pink-400/40',
-  'Musculo':     'text-amber-400 border-amber-400/40',
-  'Neuro':       'text-purple-400 border-purple-400/40',
-  'Chronic':     'text-red-400 border-red-400/40',
-  'Urology':     'text-cyan-400 border-cyan-400/40',
-  'Children':    'text-orange-400 border-orange-400/40',
-  'Men':         'text-indigo-400 border-indigo-400/40',
-}
-const defaultCat = 'text-primary-400 border-primary-400/40'
 
 export default function Footer() {
-  const { specialities } = useSpecialities()
   const { doctors } = useDoctors()
 
   return (
@@ -85,12 +67,7 @@ export default function Footer() {
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-3 mb-6">
-              <Link
-                to="/book-appointment"
-                className="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold py-2.5 px-5 rounded-xl transition-colors"
-              >
-                📅 Book Appointment
-              </Link>
+
               <a
                 href={`tel:${siteData.contact.phone}`}
                 className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary-400 transition-colors"
@@ -173,37 +150,6 @@ export default function Footer() {
       {/* ── Divider ── */}
       <div className="border-t border-white/10" />
 
-      {/* ── Row 2: Specialities & Treatments ── */}
-      {specialities.length > 0 && (
-        <div className="container-max px-4 md:px-8 py-10">
-          <h4 className="font-heading font-semibold text-white mb-8 text-sm uppercase tracking-wider flex items-center gap-3">
-            <span className="w-6 h-px bg-primary-500 inline-block" />
-            Medical Specialities
-            <span className="w-6 h-px bg-primary-500 inline-block" />
-          </h4>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {specialities.map((spec) => {
-              const color = catColor[spec.category] || defaultCat
-              const treatments = Array.isArray(spec.treatments) ? spec.treatments : []
-              return (
-                <div key={spec.id}>
-                  {/* Speciality header */}
-                  <Link
-                    to={`/specialities`}
-                    className={`inline-flex items-center gap-1.5 font-heading font-bold text-xs uppercase tracking-wider mb-3 border-b pb-2 w-full ${color} hover:opacity-80 transition-opacity`}
-                  >
-                    {spec.icon && <span className="text-base leading-none">{spec.icon}</span>}
-                    {spec.name}
-                  </Link>
-                  <p className="text-[10px] text-gray-500 leading-relaxed mb-4">{spec.description?.substring(0, 60)}...</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      )}
-
       {/* ── Row 3: Our Doctors ── */}
       {doctors.length > 0 && (
         <>
@@ -263,7 +209,7 @@ export default function Footer() {
             {legalLinks.map(({ label, to }) => (
               <Link key={to} to={to} className="hover:text-gray-300 transition-colors">{label}</Link>
             ))}
-            <Link to="/admin/login" className="hover:text-gray-300 transition-colors">Admin</Link>
+            <Link to="/admin/login" className="hover:text-gray-300 transition-colors font-semibold text-primary-500">Admin Login</Link>
           </div>
         </div>
       </div>

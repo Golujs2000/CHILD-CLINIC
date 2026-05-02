@@ -15,7 +15,7 @@ const WA_NUMBER = siteData.contact.phone.replace(/\D/g, '')
 const WA_MESSAGE = encodeURIComponent(
   'Hello! I found Child Clinic online and would like to know more about your services / book an appointment.'
 )
-const WA_URL = `https://wa.me/91${WA_NUMBER}?text=${WA_MESSAGE}`
+const WA_URL = `https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`
 
 // WhatsApp SVG icon (official green brand icon)
 function WhatsAppIcon() {

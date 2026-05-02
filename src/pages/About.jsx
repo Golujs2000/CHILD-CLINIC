@@ -114,7 +114,11 @@ export default function About() {
                   <div className="relative rounded-3xl bg-gradient-to-br from-primary-50 via-white to-accent-50/60 border-2 border-primary-100/70 shadow-2xl shadow-primary-200/30 pt-6 pb-0 px-4 mb-20">
                     <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-primary-400 rounded-tl-lg"></div>
                     <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-primary-400 rounded-tr-lg"></div>
-                    <img alt="Dr. Anshuman" className="w-full h-auto max-h-[460px] object-contain object-bottom relative z-10" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776743194623_Dr.%20Rajesh%20Kumar%20Ranjan03%20copy.webp?alt=media&token=d7b20f39-dd98-4662-aa9e-eea01cd9f124" />
+                    <img 
+                      src="https://firebasestorage.googleapis.com/v0/b/child-clinic.firebasestorage.app/o/gallery%2F1777714740704_DR.%20ANSHUMAN01.webp?alt=media&token=27dc5999-2e10-4cd4-a081-9a71250a0a89" 
+                      alt="Dr. Anshuman" 
+                      className="w-full h-auto max-h-[460px] object-contain object-bottom relative z-10" 
+                    />
                     
                     <div className="absolute -bottom-[4.5rem] left-3 right-3 z-20">
                       <div className="bg-white/90 backdrop-blur-md border border-primary-100 rounded-2xl shadow-xl px-5 py-4">
@@ -146,7 +150,7 @@ export default function About() {
                 <p className="text-gray-500 text-xs mt-1 font-medium">Est. Year</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-center bg-white border border-primary-100 rounded-2xl py-5 px-3 shadow-sm">
-                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">500+</p>
+                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">1000+</p>
                 <p className="text-gray-500 text-xs mt-1 font-medium">Happy Families</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-center bg-white border border-primary-100 rounded-2xl py-5 px-3 shadow-sm">
@@ -154,8 +158,8 @@ export default function About() {
                 <p className="text-gray-500 text-xs mt-1 font-medium">Yrs Experience</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-center bg-white border border-primary-100 rounded-2xl py-5 px-3 shadow-sm">
-                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">8</p>
-                <p className="text-gray-500 text-xs mt-1 font-medium">Specialized Units</p>
+                <p className="font-heading text-2xl md:text-3xl font-black text-primary-600">1000+</p>
+                <p className="text-gray-500 text-xs mt-1 font-medium">New Borns Cared</p>
               </motion.div>
             </div>
           </div>
@@ -164,18 +168,18 @@ export default function About() {
         {/* ── Story ──────────────────────────────────────────────── */}
         <section className="section-padding bg-white">
           <div className="container-max grid lg:grid-cols-2 gap-14 items-center">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="grid grid-cols-2 gap-3">
-              <div className="overflow-hidden rounded-2xl row-span-2">
-                <img alt="Dr. Anshuman" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776743472351_Dr.%20Rajesh%20Kumar%20Ranjan%2001.webp?alt=media&token=8600d364-1a08-4a48-bfe0-d4bddf5e3522" style={{ minHeight: '320px' }} />
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="relative">
+              <div className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white bg-primary-50">
+                <img 
+                  src="https://firebasestorage.googleapis.com/v0/b/child-clinic.firebasestorage.app/o/gallery%2F1777714740704_DR.%20ANSHUMAN01.webp?alt=media&token=27dc5999-2e10-4cd4-a081-9a71250a0a89" 
+                  alt="Dr. Anshuman" 
+                  className="w-full h-full object-cover" 
+                />
               </div>
-              <div className="overflow-hidden rounded-2xl">
-                <img alt="Clinic Desk" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776742720014_dr-rajesh-kumar-ranjan-at-desk-02.webp?alt=media&token=44596081-dead-4da0-af4c-415e6b62e51d" style={{ minHeight: '150px' }} />
-              </div>
-              <div className="overflow-hidden rounded-2xl">
-                <img alt="Clinic Room" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776742726467_dr-rajesh-kumar-ranjan-at-desk-05.webp?alt=media&token=329e0c0c-74bd-411c-a092-91206d7388fc" style={{ minHeight: '150px' }} />
-              </div>
-              <div className="overflow-hidden rounded-2xl">
-                <img alt="Clinic Staff" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://firebasestorage.googleapis.com/v0/b/carehomeopathicclinic-e545f.firebasestorage.app/o/gallery%2F1776648270276_clinic-staff-04.webp?alt=media&token=1c2fb3d5-81a8-4a14-9b45-f3a761199729" style={{ minHeight: '150px' }} />
+              {/* Experience Badge */}
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-5 border border-primary-100">
+                <p className="text-3xl font-black text-primary-600 leading-none">7+</p>
+                <p className="text-[10px] font-bold text-navy-800 uppercase tracking-widest mt-1">Years Experience</p>
               </div>
             </motion.div>
             
