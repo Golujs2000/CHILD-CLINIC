@@ -1,196 +1,23 @@
 // ─────────────────────────────────────────────────────────────
 // pages/Services.jsx
-// All specialities/departments page.
-// Fetches specialities from Firestore, groups them by category,
-// and renders expandable sections with treatment lists, costs,
-// and availability. Uses useMemo for category grouping.
+// Redesigned Specialities/Departments page.
+// Grid-based clickable cards for each clinical department.
 // ─────────────────────────────────────────────────────────────
 
 import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import {
-  FiChevronDown, FiCheck, FiClock, FiActivity,
-  FiCalendar, FiAlertCircle, FiUser, FiUsers, FiArrowRight,
+import { motion } from 'framer-motion'
+import { 
+  FiArrowRight, FiActivity, FiCalendar, FiAlertCircle, 
+  FiClock, FiCheckCircle 
 } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import { useSpecialities } from '../hooks/useSpecialities'
-import { useDoctors } from '../hooks/useDoctors'
+import { siteData } from '../data/siteData'
 
-// ── Config ────────────────────────────────────────────────────────────────────
-const CATEGORY_CONFIG = {
-  'General':     { emoji: '🩺', bg: 'bg-primary-600',  light: 'bg-primary-50',  text: 'text-primary-700',  border: 'border-primary-200' },
-  'Skin':        { emoji: '✨', bg: 'bg-teal-600',     light: 'bg-teal-50',     text: 'text-teal-700',     border: 'border-teal-200' },
-  'Digestive':   { emoji: '🫁', bg: 'bg-green-600',   light: 'bg-green-50',    text: 'text-green-700',    border: 'border-green-200' },
-  'Respiratory': { emoji: '🌬️', bg: 'bg-sky-600',      light: 'bg-sky-50',      text: 'text-sky-700',      border: 'border-sky-200' },
-  'Women':       { emoji: '🌸', bg: 'bg-pink-600',    light: 'bg-pink-50',     text: 'text-pink-700',     border: 'border-pink-200' },
-  'Musculo':     { emoji: '🦴', bg: 'bg-amber-600',   light: 'bg-amber-50',    text: 'text-amber-700',    border: 'border-amber-200' },
-  'Neuro':       { emoji: '🧠', bg: 'bg-purple-600',  light: 'bg-purple-50',   text: 'text-purple-700',   border: 'border-purple-200' },
-  'Chronic':     { emoji: '💊', bg: 'bg-red-600',     light: 'bg-red-50',      text: 'text-red-700',      border: 'border-red-200' },
-  'Urology':     { emoji: '💧', bg: 'bg-cyan-600',    light: 'bg-cyan-50',     text: 'text-cyan-700',     border: 'border-cyan-200' },
-  'Children':    { emoji: '🧒', bg: 'bg-orange-600',  light: 'bg-orange-50',   text: 'text-orange-700',   border: 'border-orange-200' },
-  'Men':         { emoji: '💪', bg: 'bg-indigo-600',  light: 'bg-indigo-50',   text: 'text-indigo-700',   border: 'border-indigo-200' },
-  'Skin Diseases':    { emoji: '✨', bg: 'bg-teal-600',  light: 'bg-teal-50',  text: 'text-teal-700',  border: 'border-teal-200' },
-  "Women's Health":   { emoji: '🌸', bg: 'bg-pink-600',  light: 'bg-pink-50',  text: 'text-pink-700',  border: 'border-pink-200' },
-  'Kidney & Urinary': { emoji: '💧', bg: 'bg-cyan-600',  light: 'bg-cyan-50',  text: 'text-cyan-700',  border: 'border-cyan-200' },
-  'Diagnostic':       { emoji: '🔬', bg: 'bg-slate-600', light: 'bg-slate-50', text: 'text-slate-700', border: 'border-slate-200' },
-  'Support':          { emoji: '🤝', bg: 'bg-amber-600', light: 'bg-amber-50', text: 'text-amber-700', border: 'border-amber-200' },
-  'Department':       { emoji: '🏥', bg: 'bg-primary-600', light: 'bg-primary-50', text: 'text-primary-700', border: 'border-primary-200' },
-  'Specialized Unit': { emoji: '🏥', bg: 'bg-primary-600', light: 'bg-primary-50', text: 'text-primary-700', border: 'border-primary-200' },
-}
-
-// ALL_CATEGORIES is derived from live data in the component below
-
-const AVAIL_COLOR = {
-  '24 × 7':         'bg-green-100 text-green-700',
-  'OPD Hours':      'bg-blue-100 text-blue-700',
-  'By Appointment': 'bg-gray-100 text-gray-600',
-}
-
-
-
-// ── Speciality Card ───────────────────────────────────────────────────────────
-function SpecialityCard({ spec, isOpen, onToggle, colorCfg, doctors = [] }) {
-  const hasFeatures = Array.isArray(spec.features) && spec.features.length > 0
-  const cfg = colorCfg || CATEGORY_CONFIG[spec.category] || CATEGORY_CONFIG['Support']
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className={`bg-white rounded-2xl border ${isOpen ? cfg.border : 'border-gray-100'} shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden`}
-    >
-      {/* Card Header — always visible */}
-      <button
-        className="w-full text-left p-5 flex items-start gap-4"
-        onClick={onToggle}
-      >
-        {/* Icon */}
-        <div className={`w-12 h-12 rounded-xl ${cfg.bg} flex items-center justify-center text-2xl shrink-0 shadow-sm`}>
-          {spec.icon || cfg.emoji}
-        </div>
-
-        {/* Title block */}
-        <div className="flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2 mb-1">
-            <h3 className="font-bold text-navy-800 text-base">{spec.name}</h3>
-            {spec.available && (
-              <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${AVAIL_COLOR[spec.available] || 'bg-gray-100 text-gray-500'}`}>
-                {spec.available}
-              </span>
-            )}
-          </div>
-          <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">{spec.description}</p>
-
-          {/* Meta row */}
-          <div className="flex flex-wrap gap-4 mt-2 text-xs text-gray-400">
-            {spec.recoveryTime && (
-              <span className="flex items-center gap-1">
-                <FiClock size={11} className="text-primary-400" /> {spec.recoveryTime}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Chevron */}
-        <FiChevronDown
-          className={`w-5 h-5 text-gray-400 shrink-0 mt-1 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-        />
-      </button>
-
-      {/* Expandable body */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden"
-          >
-            <div className={`px-5 pb-5 border-t ${cfg.border}`}>
-
-              {/* Key features */}
-              {hasFeatures && (
-                <div className="pt-4 mb-4">
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Key Highlights</p>
-                  <div className="flex flex-wrap gap-2">
-                    {spec.features.map((f) => (
-                      <span key={f} className={`text-xs px-2.5 py-1 rounded-lg ${cfg.light} ${cfg.text} font-medium`}>
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-
-
-              {/* Doctors in this speciality */}
-              {doctors.length > 0 && (
-                <div className={`${hasFeatures ? 'mt-4' : 'pt-4'}`}>
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-1">
-                    <FiUsers size={11} /> Our Doctors
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {doctors.map((doc) => (
-                      <Link
-                        key={doc.id}
-                        to={`/doctors/${doc.id}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-gray-50 hover:bg-primary-50 border border-gray-100 hover:border-primary-200 transition-colors group"
-                      >
-                        {doc.image ? (
-                          <img src={doc.image} alt={doc.name} className="w-8 h-8 rounded-full object-cover shrink-0" />
-                        ) : (
-                          <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center shrink-0">
-                            <FiUser size={14} className="text-primary-500" />
-                          </div>
-                        )}
-                        <div>
-                          <p className="text-xs font-semibold text-navy-800 group-hover:text-primary-700 leading-tight">{doc.name}</p>
-                          {doc.qualification && (
-                            <p className="text-xs text-gray-400 leading-tight">{doc.qualification}</p>
-                          )}
-                        </div>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* CTAs */}
-              <div className="mt-4 flex gap-2">
-                <Link
-                  to={`/specialities/${spec.slug}`}
-                  className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl border ${cfg.border} ${cfg.text} text-sm font-semibold hover:${cfg.light} transition-colors`}
-                >
-                  View Details <FiArrowRight size={13} />
-                </Link>
-                <Link
-                  to="/book-appointment"
-                  state={{ department: spec.name }}
-                  onClick={(e) => e.stopPropagation()}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors"
-                >
-                  <FiCalendar size={13} /> Book
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  )
-}
-
-// ── Main Page ─────────────────────────────────────────────────────────────────
 export default function Services() {
   const { specialities, loading } = useSpecialities()
-  const { doctors } = useDoctors()
   const [activeCategory, setActiveCategory] = useState('All')
-  const [openId, setOpenId] = useState(null)
 
   const allCategories = useMemo(() => {
     const cats = [...new Set(specialities.map((s) => s.category).filter(Boolean))]
@@ -202,14 +29,6 @@ export default function Services() {
     return specialities.filter((s) => s.category === activeCategory)
   }, [specialities, activeCategory])
 
-  const handleCategoryChange = (cat) => {
-    setActiveCategory(cat)
-    setOpenId(null)
-  }
-
-  // Stats derived from data
-  const totalSpecialities = specialities.length
-
   return (
     <>
       <SEO
@@ -218,107 +37,161 @@ export default function Services() {
         keywords={['pediatric specialities Saharsa', 'NICU Saharsa', 'child vaccination Saharsa', 'pediatric emergency Kosi region', 'neonatology Saharsa']}
       />
 
-      {/* Hero */}
-      <section className="page-hero text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="container-max">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">
-            Medical Specialities
-          </h1>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto">
-            {specialities.length > 0
-              ? `${specialities.length} specialized units providing expert pediatric care in Saharsa`
-              : 'Comprehensive medical care across all major pediatric specialities in Saharsa, Bihar'}
-          </p>
-        </motion.div>
+      {/* Hero Section */}
+      <section className="relative bg-navy-900 pt-36 pb-24 overflow-hidden">
+        {/* Abstract background elements */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-primary-600/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-accent-400/5 blur-[100px] rounded-full -translate-x-1/4 translate-y-1/4"></div>
+
+        <div className="container-max relative z-10 px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="inline-block px-4 py-1.5 bg-primary-600/20 text-primary-400 text-[10px] font-black uppercase tracking-[0.3em] rounded-full mb-6 border border-primary-600/30">
+              Clinical Excellence
+            </span>
+            <h1 className="font-heading text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">
+              Medical <span className="text-primary-500">Specialities</span>
+            </h1>
+            <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
+              Comprehensive pediatric care through specialized departments, equipped with advanced medical technology for the Kosi region.
+            </p>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Category Tab Bar */}
-      <section className="bg-white border-b border-gray-100 sticky top-[64px] z-20 shadow-sm">
+      {/* Category Filter Bar */}
+      <section className="bg-white border-b border-gray-100 sticky top-[64px] z-30 shadow-sm overflow-x-auto no-scrollbar">
         <div className="container-max px-4">
-          <div className="flex flex-wrap gap-2 py-3">
-            {allCategories.map((cat) => {
-              const cfg = CATEGORY_CONFIG[cat]
-              const isActive = activeCategory === cat
-              const count = specialities.filter((s) => s.category === cat).length
-              return (
-                <button
-                  key={cat}
-                  onClick={() => handleCategoryChange(cat)}
-                  className={`flex items-center gap-1.5 whitespace-nowrap px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
-                    isActive
-                      ? 'bg-primary-600 text-white shadow-sm'
-                      : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-                  }`}
-                >
-                  <span>{cfg ? cfg.emoji : '🌿'}</span>
-                  {cat}
-                  {cat !== 'All' && (
-                    <span className={`text-xs px-1.5 py-0.5 rounded-full ${isActive ? 'bg-white/20' : 'bg-gray-100 text-gray-400'}`}>
-                      {count}
-                    </span>
-                  )}
-                </button>
-              )
-            })}
+          <div className="flex items-center gap-3 py-4 min-w-max">
+            {allCategories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-6 py-2.5 rounded-2xl text-sm font-bold transition-all duration-300 ${
+                  activeCategory === cat
+                    ? 'bg-navy-900 text-white shadow-xl shadow-navy-900/20 scale-105'
+                    : 'bg-gray-50 text-gray-400 hover:bg-gray-100 hover:text-navy-800'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Specialities Grid */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-max">
+      <section className="section-padding bg-gray-50/50 min-h-[60vh]">
+        <div className="container-max px-4">
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="h-48 bg-white rounded-2xl animate-pulse border border-gray-100" />
+                <div key={i} className="h-[400px] bg-white rounded-[40px] animate-pulse border border-gray-100 shadow-sm" />
               ))}
             </div>
           ) : filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 text-gray-400">
-              <FiAlertCircle size={40} className="mb-3 opacity-40" />
-              <p className="font-medium">No specialities in this category yet</p>
-              <p className="text-sm mt-1">Check back soon or view all specialities</p>
+            <div className="flex flex-col items-center justify-center py-32 text-center">
+              <div className="w-20 h-20 rounded-full bg-gray-100 flex items-center justify-center text-gray-300 mb-6">
+                <FiAlertCircle size={40} />
+              </div>
+              <h3 className="text-2xl font-bold text-navy-800 mb-2">No Specialities Found</h3>
+              <p className="text-gray-400 max-w-md mx-auto mb-8">We haven't listed any departments in this category yet. Please check back later.</p>
               <button
                 onClick={() => setActiveCategory('All')}
-                className="mt-4 text-sm text-primary-600 hover:underline"
+                className="text-primary-600 font-bold hover:underline underline-offset-4"
               >
-                View all →
+                Clear Filters & View All
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {filtered.map((spec) => (
-                <SpecialityCard
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filtered.map((spec, i) => (
+                <motion.div
                   key={spec.id}
-                  spec={spec}
-                  isOpen={openId === spec.id}
-                  onToggle={() => setOpenId(openId === spec.id ? null : spec.id)}
-                  colorCfg={CATEGORY_CONFIG[spec.category]}
-                  doctors={doctors.filter((d) =>
-                    d.specialty === spec.name ||
-                    (Array.isArray(d.specialties) && d.specialties.includes(spec.name))
-                  )}
-                />
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
+                >
+                  <Link 
+                    to={`/specialities/${spec.slug}`}
+                    className="group block bg-white rounded-[40px] border border-gray-100 p-10 hover:border-primary-200 hover:shadow-2xl hover:shadow-primary-900/10 transition-all duration-500 relative overflow-hidden h-full flex flex-col"
+                  >
+                    {/* Decorative pattern */}
+                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-50 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="flex justify-between items-start mb-8">
+                        <div className="w-20 h-20 rounded-3xl bg-gray-50 flex items-center justify-center text-4xl shadow-sm border border-gray-100 group-hover:bg-primary-600 group-hover:text-white transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6">
+                          {spec.icon || '🩺'}
+                        </div>
+                        <div className="bg-green-50 text-green-600 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border border-green-100">
+                          {spec.available || 'Active'}
+                        </div>
+                      </div>
+
+                      <h3 className="font-heading text-3xl font-black text-navy-800 mb-4 tracking-tight group-hover:text-primary-600 transition-colors">
+                        {spec.name}
+                      </h3>
+                      
+                      <p className="text-gray-500 text-sm leading-relaxed mb-8 line-clamp-4 font-medium italic">
+                        "{spec.description}"
+                      </p>
+
+                      <div className="mt-auto space-y-6">
+                        <div className="flex flex-wrap gap-2">
+                          {(spec.features || []).slice(0, 3).map((f) => (
+                            <span key={f} className="inline-flex items-center gap-1.5 text-[10px] font-bold text-navy-600 px-3 py-1 bg-navy-50 rounded-lg">
+                              <FiCheckCircle className="text-primary-500" /> {f}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="pt-6 border-t border-gray-50 flex items-center justify-between">
+                          <span className="text-xs font-black text-primary-600 uppercase tracking-widest">Learn More</span>
+                          <div className="w-10 h-10 rounded-full bg-primary-50 flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-all duration-500 transform group-hover:translate-x-2">
+                            <FiArrowRight />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           )}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-primary-600 text-center">
-        <div className="container-max px-4">
-          <h2 className="font-heading text-3xl font-bold text-white mb-3">
-            Not Sure Which Department You Need?
-          </h2>
-          <p className="text-white/80 mb-8 max-w-xl mx-auto">
-            Call our helpline and our team will guide you to the right specialist.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/book-appointment" className="btn-accent">Book Appointment</Link>
-            <Link to="/contact" className="btn-secondary border-white/40 text-white hover:bg-white/10">
-              Contact Us
-            </Link>
+      {/* CTA Section */}
+      <section className="section-padding bg-navy-900 text-white relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-1/2 h-full bg-primary-600/10 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div className="container-max relative z-10 px-4">
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[48px] p-12 md:p-20 text-center max-w-4xl mx-auto shadow-2xl">
+            <h2 className="font-heading text-4xl md:text-6xl font-black mb-8 leading-tight">
+              Looking for a <span className="text-primary-400">Specialist?</span>
+            </h2>
+            <p className="text-white/60 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-medium">
+              Our support team is here to guide you to the right department for your child's specific medical needs.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <Link 
+                to="/book-appointment" 
+                className="btn-primary w-full sm:w-auto px-10 py-5 text-lg rounded-2xl shadow-xl shadow-primary-900/40 hover:scale-105"
+              >
+                Book Appointment
+              </Link>
+              <a 
+                href={`tel:${siteData.contact.phone}`}
+                className="w-full sm:w-auto flex items-center justify-center gap-3 text-white font-bold px-10 py-5 rounded-2xl border border-white/20 hover:bg-white/10 transition-all"
+              >
+                Call Helpline: {siteData.contact.phone}
+              </a>
+            </div>
           </div>
         </div>
       </section>

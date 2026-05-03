@@ -9,17 +9,20 @@ import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { 
   FiArrowLeft, FiClock, FiCheck, FiCalendar, 
-  FiPhone, FiInfo, FiActivity, FiArrowRight 
+  FiPhone, FiInfo, FiActivity, FiArrowRight, FiUser 
 } from 'react-icons/fi'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 import { db } from '../firebase/config'
 import SEO from '../components/SEO'
 import { siteData } from '../data/siteData'
+import { getInitials, slugify } from '../utils/helpers'
+import { useDoctors } from '../hooks/useDoctors'
 
 export default function ServiceDetail() {
   const { slug } = useParams()
   const [service, setService] = useState(null)
   const [loading, setLoading] = useState(true)
+  const { doctors } = useDoctors()
 
   useEffect(() => {
     const fetchService = async () => {
@@ -129,36 +132,44 @@ export default function ServiceDetail() {
             
             {/* Left Content */}
             <div className="lg:col-span-2 space-y-10">
-              {/* Detailed Info Card */}
+              {/* Infrastructure Section (Added More Details) */}
               <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                className="bg-white rounded-[32px] p-10 shadow-xl shadow-navy-900/5 border border-gray-100"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-navy-900 rounded-[32px] p-10 text-white shadow-2xl shadow-navy-900/10"
               >
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="w-12 h-12 rounded-2xl bg-primary-50 flex items-center justify-center text-primary-600">
-                    <FiInfo size={24} />
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-accent-400">
+                    <FiActivity size={24} />
                   </div>
-                  <h2 className="text-3xl font-bold text-navy-800 tracking-tight">Facility Details</h2>
+                  <h2 className="text-3xl font-bold tracking-tight">Equipment & Infrastructure</h2>
                 </div>
-                
-                <p className="text-gray-600 leading-relaxed text-xl font-medium mb-10">
-                  {service.description}
-                </p>
-                
-                <div className="grid sm:grid-cols-2 gap-6 pt-10 border-t border-gray-50">
-                  <div className="p-6 rounded-3xl bg-primary-50/50 border border-primary-100">
-                    <h4 className="font-black text-primary-900 mb-3 text-xs uppercase tracking-widest">Saharsa Center Excellence</h4>
-                    <p className="text-primary-800/70 text-sm leading-relaxed font-medium">
-                      Equipped with modern technology and monitored by Dr. Anshuman's expert team, we ensure the highest standards of safety.
-                    </p>
+                <div className="grid sm:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                      <p className="text-accent-400 font-black text-[10px] uppercase tracking-widest mb-1">Advanced Technology</p>
+                      <p className="text-white font-bold">LED Phototherapy & Incubators</p>
+                    </div>
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                      <p className="text-accent-400 font-black text-[10px] uppercase tracking-widest mb-1">Monitoring</p>
+                      <p className="text-white font-bold">Continuous Multipara Monitors</p>
+                    </div>
                   </div>
-                  <div className="p-6 rounded-3xl bg-accent-50/50 border border-accent-100">
-                    <h4 className="font-black text-accent-900 mb-3 text-xs uppercase tracking-widest">Kosi Region Support</h4>
-                    <p className="text-accent-800/70 text-sm leading-relaxed font-medium">
-                      As a key medical hub, this facility serves thousands of families across the Kosi region with dedicated 24/7 support.
-                    </p>
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                      <p className="text-accent-400 font-black text-[10px] uppercase tracking-widest mb-1">Diagnostics</p>
+                      <p className="text-white font-bold">Automated Biochemistry Analyzers</p>
+                    </div>
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                      <p className="text-accent-400 font-black text-[10px] uppercase tracking-widest mb-1">Life Support</p>
+                      <p className="text-white font-bold">Centralized Oxygen Supply</p>
+                    </div>
                   </div>
+                </div>
+                <div className="mt-8 pt-8 border-t border-white/5 flex items-center gap-3">
+                  <FiCheck className="text-green-400" />
+                  <p className="text-white/60 text-sm font-medium italic">Regularly sanitized and calibrated as per medical standards.</p>
                 </div>
               </motion.div>
 
@@ -196,22 +207,72 @@ export default function ServiceDetail() {
 
             {/* Right Sidebar */}
             <div className="space-y-8">
+              {/* Doctor Profile Sidebar Card (New) */}
+              {(doctors.find(d => d.name.includes('Anshuman'))) && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-[32px] p-8 border border-gray-100 shadow-xl shadow-navy-900/5 relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-primary-50 rounded-full blur-3xl -translate-y-10 translate-x-10"></div>
+                  
+                  <div className="relative z-10">
+                    <h4 className="text-[10px] font-black text-primary-600 uppercase tracking-widest mb-6">Medical Oversight</h4>
+                    
+                    <div className="flex items-center gap-5 mb-8">
+                      <div className="w-20 h-20 rounded-2xl bg-gray-100 overflow-hidden border-2 border-white shadow-md">
+                        <img 
+                          src={doctors.find(d => d.name.includes('Anshuman')).image || '/doctor-placeholder.png'} 
+                          alt={doctors.find(d => d.name.includes('Anshuman')).name} 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-navy-800 text-lg leading-tight">{doctors.find(d => d.name.includes('Anshuman')).name}</h3>
+                        <p className="text-gray-400 text-xs font-medium mt-1">{doctors.find(d => d.name.includes('Anshuman')).qualification}</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Link 
+                        to="/book-appointment" 
+                        state={{ 
+                          department: service.name,
+                          doctorId: doctors.find(d => d.name.includes('Anshuman')).id 
+                        }}
+                        className="w-full flex items-center justify-center gap-3 bg-primary-600 hover:bg-primary-500 text-white font-black py-4 rounded-2xl shadow-lg shadow-primary-900/20 transition-all hover:scale-[1.02]"
+                      >
+                        <FiCalendar size={18} /> Book Appointment
+                      </Link>
+                      
+                      <Link 
+                        to={`/doctors/${doctors.find(d => d.name.includes('Anshuman')).slug || slugify(doctors.find(d => d.name.includes('Anshuman')).name)}`}
+                        className="w-full flex items-center justify-center gap-3 bg-navy-50 text-navy-800 font-bold py-4 rounded-2xl hover:bg-navy-100 transition-colors"
+                      >
+                        <FiUser size={18} /> View Full Profile
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
               {/* Support Card */}
               <motion.div 
                 initial={{ opacity: 0, x: 20 }} 
                 animate={{ opacity: 1, x: 0 }} 
-                className="bg-white rounded-[32px] p-10 border-2 border-primary-500 shadow-2xl shadow-primary-900/10 relative overflow-hidden"
+                className="bg-navy-900 rounded-[32px] p-10 text-white relative overflow-hidden shadow-2xl shadow-navy-900/40"
               >
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary-50 rounded-full blur-3xl"></div>
-                <h3 className="text-3xl font-bold text-navy-800 mb-4 tracking-tight leading-tight">Help & Queries</h3>
-                <p className="text-gray-500 mb-8 text-base leading-relaxed">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary-600/20 blur-3xl rounded-full translate-x-10 -translate-y-10"></div>
+                <h3 className="text-3xl font-bold mb-4 tracking-tight leading-tight">Help & Queries</h3>
+                <p className="text-white/70 mb-8 text-base leading-relaxed">
                   Need more information about the **{service.name}** facility at Child Clinic?
                 </p>
-                <div className="space-y-4">
-                  <a href={`tel:${siteData.contact.phone}`} className="btn-primary w-full justify-center py-5 text-lg shadow-xl shadow-primary-900/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                <div className="space-y-4 pt-8 border-t border-white/10">
+                  <a href={`tel:${siteData.contact.phone}`} className="w-full flex items-center justify-center gap-3 bg-primary-600 hover:bg-primary-500 text-white font-black py-4 rounded-2xl shadow-lg shadow-primary-900/20 transition-all hover:scale-[1.02]">
                     <FiPhone /> Call Now
                   </a>
-                  <Link to="/contact" className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-gray-50 text-navy-800 font-bold hover:bg-gray-100 transition-colors">
+                  <Link to="/contact" className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-white/5 text-white font-bold hover:bg-white/10 transition-colors">
                     Send Message
                   </Link>
                 </div>

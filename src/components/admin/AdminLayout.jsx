@@ -25,17 +25,17 @@ import { db } from '../../firebase/config'
 import { useAuth } from '../../context/AuthContext'
 
 const NAV_LINKS = [
-  { to: '/admin',              label: 'Dashboard',      icon: FiGrid,        end: true },
-  { to: '/admin/appointments', label: 'Appointments',   icon: FiCalendar },
-  { to: '/admin/doctors',      label: 'Doctors',        icon: FiUsers },
-  { to: '/admin/blog',         label: 'Blog',           icon: FiFileText },
-  { to: '/admin/gallery',      label: 'Gallery',        icon: FiImage },
-  { to: '/admin/messages',     label: 'Messages',       icon: FiMail,        badge: true },
-  { to: '/admin/specialities', label: 'Specialities',   icon: FiStar },
-  { to: '/admin/services',     label: 'Hosp. Services', icon: FiPlusSquare },
+  { to: '/admin', label: 'Dashboard', icon: FiGrid, end: true },
+  { to: '/admin/appointments', label: 'Appointments', icon: FiCalendar },
+  { to: '/admin/doctors', label: 'Doctors', icon: FiUsers },
+  { to: '/admin/blog', label: 'Blog', icon: FiFileText },
+  { to: '/admin/gallery', label: 'Gallery', icon: FiImage },
+  { to: '/admin/messages', label: 'Messages', icon: FiMail, badge: true },
+  { to: '/admin/specialities', label: 'Specialities', icon: FiStar },
+  { to: '/admin/services', label: 'Services', icon: FiPlusSquare },
   // Admin-only links — hidden from staff role
-  { to: '/admin/staff',        label: 'Staff',          icon: FiUserCheck,   adminOnly: true },
-  { to: '/admin/settings',     label: 'Settings',       icon: FiSettings,    adminOnly: true },
+  { to: '/admin/staff', label: 'Staff', icon: FiUserCheck, adminOnly: true },
+  { to: '/admin/settings', label: 'Settings', icon: FiSettings, adminOnly: true },
 ]
 
 export default function AdminLayout() {
@@ -121,103 +121,103 @@ export default function AdminLayout() {
 
   return (
     <>
-    <Helmet>
-      <meta name="robots" content="noindex, nofollow" />
-    </Helmet>
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-100 shadow-sm fixed inset-y-0 left-0 z-30">
-        <SidebarContent />
-      </aside>
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      <div className="min-h-screen bg-gray-50 flex">
+        {/* Desktop Sidebar */}
+        <aside className="hidden lg:flex flex-col w-64 bg-white border-r border-gray-100 shadow-sm fixed inset-y-0 left-0 z-30">
+          <SidebarContent />
+        </aside>
 
-      {/* Mobile Overlay */}
-      <AnimatePresence>
-        {sidebarOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/40 z-40 lg:hidden"
-              onClick={() => setSidebarOpen(false)}
-            />
-            <motion.aside
-              initial={{ x: -280 }}
-              animate={{ x: 0 }}
-              exit={{ x: -280 }}
-              transition={{ type: 'tween', duration: 0.25 }}
-              className="fixed inset-y-0 left-0 w-72 bg-white z-50 lg:hidden shadow-2xl flex flex-col"
-            >
-              <div className="absolute top-4 right-4">
+        {/* Mobile Overlay */}
+        <AnimatePresence>
+          {sidebarOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+                onClick={() => setSidebarOpen(false)}
+              />
+              <motion.aside
+                initial={{ x: -280 }}
+                animate={{ x: 0 }}
+                exit={{ x: -280 }}
+                transition={{ type: 'tween', duration: 0.25 }}
+                className="fixed inset-y-0 left-0 w-72 bg-white z-50 lg:hidden shadow-2xl flex flex-col"
+              >
+                <div className="absolute top-4 right-4">
+                  <button
+                    onClick={() => setSidebarOpen(false)}
+                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <FiX size={20} />
+                  </button>
+                </div>
+                <SidebarContent />
+              </motion.aside>
+            </>
+          )}
+        </AnimatePresence>
+
+        {/* Main Content */}
+        <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
+          {/* Top Header */}
+          <header className="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-20">
+            <div className="flex items-center justify-between px-4 md:px-6 h-16">
+              <div className="flex items-center gap-3">
                 <button
-                  onClick={() => setSidebarOpen(false)}
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  onClick={() => setSidebarOpen(true)}
+                  className="lg:hidden text-gray-500 hover:text-gray-700 transition-colors"
                 >
-                  <FiX size={20} />
+                  <FiMenu size={22} />
+                </button>
+                <div className="hidden sm:flex items-center gap-2">
+                  <img
+                    src="/child-clinic-logo.png"
+                    alt="Child Clinic Logo"
+                    className="w-8 h-8 object-contain shrink-0"
+                  />
+                  <span className="font-semibold text-navy-800 text-sm">Child Clinic</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                {unreadCount > 0 && (
+                  <div className="relative">
+                    <FiBell size={20} className="text-gray-500" />
+                    <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center font-bold">
+                      {unreadCount > 9 ? '9+' : unreadCount}
+                    </span>
+                  </div>
+                )}
+                <div className="hidden md:flex items-center gap-2 text-sm text-gray-600">
+                  <div className="w-7 h-7 rounded-full bg-primary-100 flex items-center justify-center">
+                    <span className="text-primary-700 font-semibold text-xs text-center">
+                      {(userName || user?.email)?.[0]?.toUpperCase() || 'A'}
+                    </span>
+                  </div>
+                  <span className="truncate max-w-[160px] font-medium">{userName || user?.email}</span>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors font-medium"
+                >
+                  <FiLogOut size={16} />
+                  <span className="hidden sm:inline">Logout</span>
                 </button>
               </div>
-              <SidebarContent />
-            </motion.aside>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Main Content */}
-      <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
-        {/* Top Header */}
-        <header className="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-20">
-          <div className="flex items-center justify-between px-4 md:px-6 h-16">
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setSidebarOpen(true)}
-                className="lg:hidden text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                <FiMenu size={22} />
-              </button>
-              <div className="hidden sm:flex items-center gap-2">
-                <img
-                  src="/child-clinic-logo.png"
-                  alt="Child Clinic Logo"
-                  className="w-8 h-8 object-contain shrink-0"
-                />
-                <span className="font-semibold text-navy-800 text-sm">Child Clinic</span>
-              </div>
             </div>
+          </header>
 
-            <div className="flex items-center gap-3">
-              {unreadCount > 0 && (
-                <div className="relative">
-                  <FiBell size={20} className="text-gray-500" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-white text-xs flex items-center justify-center font-bold">
-                    {unreadCount > 9 ? '9+' : unreadCount}
-                  </span>
-                </div>
-              )}
-              <div className="hidden md:flex items-center gap-2 text-sm text-gray-600">
-                <div className="w-7 h-7 rounded-full bg-primary-100 flex items-center justify-center">
-                  <span className="text-primary-700 font-semibold text-xs text-center">
-                    {(userName || user?.email)?.[0]?.toUpperCase() || 'A'}
-                  </span>
-                </div>
-                <span className="truncate max-w-[160px] font-medium">{userName || user?.email}</span>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors font-medium"
-              >
-                <FiLogOut size={16} />
-                <span className="hidden sm:inline">Logout</span>
-              </button>
-            </div>
-          </div>
-        </header>
-
-        {/* Page Content */}
-        <main className="flex-1 p-4 md:p-6 lg:p-8">
-          <Outlet />
-        </main>
+          {/* Page Content */}
+          <main className="flex-1 p-4 md:p-6 lg:p-8">
+            <Outlet />
+          </main>
+        </div>
       </div>
-    </div>
     </>
   )
 }

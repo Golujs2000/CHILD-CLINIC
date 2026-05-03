@@ -13,7 +13,6 @@ import StatsCounter from '../components/home/StatsCounter'
 import WhyChooseUs from '../components/home/WhyChooseUs'
 import ServicesSection from '../components/home/ServicesSection'
 import FacilitiesSection from '../components/home/FacilitiesSection'
-import FeaturedDoctors from '../components/home/FeaturedDoctors'
 import DoctorHighlight from '../components/home/DoctorHighlight'
 import Testimonials from '../components/home/Testimonials'
 import BlogPreview from '../components/home/BlogPreview'
@@ -37,8 +36,7 @@ const hospitalSchema = {
     addressCountry: 'IN',
   },
   openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '09:00', closes: '20:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '10:00', closes: '14:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '09:00', closes: '20:00' },
   ],
   medicalSpecialty: [],
   availableService: [],
@@ -83,9 +81,6 @@ export default function Home() {
 
       {/* 5. World Class Facilities & Infrastructure */}
       <FacilitiesSection />
-
-      {/* 7. Featured Doctors */}
-      <FeaturedDoctors />
 
       {/* 8. Patient Testimonials */}
       <Testimonials />
@@ -147,7 +142,12 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-navy-800 text-sm mb-0.5">{label}</h4>
-                    {href ? (
+                    {label === 'Phone' ? (
+                      <div className="flex flex-col">
+                        <a href={`tel:${siteData.contact.phone}`} className="text-gray-600 text-sm hover:text-primary-600 transition-colors">{siteData.contact.phone}</a>
+                        <a href={`tel:${siteData.contact.phone2}`} className="text-gray-600 text-sm hover:text-primary-600 transition-colors">{siteData.contact.phone2}</a>
+                      </div>
+                    ) : href ? (
                       <a href={href} className="text-gray-600 text-sm hover:text-primary-600 transition-colors">{value}</a>
                     ) : (
                       <p className="text-gray-600 text-sm">{value}</p>

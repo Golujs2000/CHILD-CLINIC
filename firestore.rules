@@ -83,7 +83,7 @@ service cloud.firestore {
 
     // ADMIN ONLY
     match /staff/{doc} {
-      allow read: if isStaff();
+      allow read: if request.auth != null;
       allow write: if isAdmin();
     }
   }

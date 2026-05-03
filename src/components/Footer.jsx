@@ -11,10 +11,11 @@
 import { Link } from 'react-router-dom'
 import {
   FiFacebook, FiInstagram, FiTwitter, FiYoutube, FiLinkedin,
-  FiPhone, FiMail, FiMapPin, FiClock, FiChevronRight, FiUser,
+  FiPhone, FiMail, FiMapPin, FiClock, FiChevronRight, FiUser, FiCalendar
 } from 'react-icons/fi'
 import { siteData } from '../data/siteData'
 import { useDoctors } from '../hooks/useDoctors'
+import { getInitials, slugify } from '../utils/helpers'
 
 const quickLinks = [
   { label: 'Home',              to: '/' },
@@ -66,29 +67,39 @@ export default function Footer() {
             <p className="text-sm leading-relaxed text-gray-400 mb-6 max-w-sm">{siteData.description}</p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 mb-6">
-
-              <a
-                href={`tel:${siteData.contact.phone}`}
-                className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary-400 transition-colors"
+            <div className="space-y-4 mb-8">
+              <Link 
+                to="/book-appointment" 
+                className="inline-flex items-center gap-3 bg-primary-600 hover:bg-primary-500 text-white font-black px-8 py-4 rounded-xl shadow-lg shadow-primary-900/20 transition-all hover:scale-105 active:scale-95"
               >
-                <FiPhone className="w-4 h-4 text-primary-500" />
-                Phone: {siteData.contact.phone}
-              </a>
-            </div>
-
-            {/* Social */}
-            <div className="flex items-center gap-3">
-              {Object.entries(siteData.social).map(([platform, url]) => {
-                const Icon = socialIcons[platform]
-                return Icon ? (
-                  <a key={platform} href={url} target="_blank" rel="noopener noreferrer"
-                    className="w-9 h-9 bg-white/10 hover:bg-primary-600 rounded-lg flex items-center justify-center transition-colors"
-                    aria-label={platform}>
-                    <Icon className="w-4 h-4 text-white" />
+                <FiCalendar className="w-5 h-5" /> Book Appointment
+              </Link>
+              
+              <div className="flex flex-wrap gap-4">
+                {[siteData.contact.phone, siteData.contact.phone2].filter(Boolean).map((ph) => (
+                  <a
+                    key={ph}
+                    href={`tel:${ph}`}
+                    className="flex items-center gap-2 text-sm text-gray-400 hover:text-primary-400 transition-colors"
+                  >
+                    <FiPhone className="w-4 h-4 text-primary-500" />
+                    {ph}
                   </a>
-                ) : null
-              })}
+                ))}
+                <div className="w-px h-4 bg-white/10 hidden sm:block"></div>
+                <div className="flex items-center gap-3">
+                  {Object.entries(siteData.social).map(([platform, url]) => {
+                    const Icon = socialIcons[platform]
+                    return Icon ? (
+                      <a key={platform} href={url} target="_blank" rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-primary-400 transition-colors"
+                        aria-label={platform}>
+                        <Icon className="w-4 h-4" />
+                      </a>
+                    ) : null
+                  })}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -165,7 +176,7 @@ export default function Footer() {
               {doctors.map((doctor) => (
                 <Link
                   key={doctor.id}
-                  to={`/doctors/${doctor.id}`}
+                  to={`/doctors/${doctor.slug || slugify(doctor.name)}`}
                   className="flex items-center gap-2.5 group p-2 rounded-lg hover:bg-white/5 transition-colors"
                 >
                   {/* Avatar */}

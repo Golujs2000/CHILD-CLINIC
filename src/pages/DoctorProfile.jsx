@@ -12,7 +12,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore'
 import { motion } from 'framer-motion'
 import {
   FiPhone, FiMail, FiClock, FiCalendar,
-  FiArrowLeft, FiAward, FiUser, FiActivity, FiChevronRight,
+  FiArrowLeft, FiAward, FiUser, FiActivity, FiChevronRight, FiCheck
 } from 'react-icons/fi'
 import SEO from '../components/SEO'
 import { db } from '../firebase/config'
@@ -221,12 +221,31 @@ export default function DoctorProfile() {
               {/* Qualifications */}
               <div className="card p-8">
                 <h2 className="font-heading font-bold text-navy-800 text-xl mb-4 flex items-center gap-2">
-                  <FiUser className="w-5 h-5 text-primary-500" /> Qualifications
+                  <FiAward className="w-5 h-5 text-primary-500" /> Qualifications
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {doctor.qualification?.split(',').map((q) => (
                     <span key={q} className="badge bg-primary-50 text-primary-700">{q.trim()}</span>
                   ))}
+                </div>
+              </div>
+
+              {/* Specialities */}
+              <div className="card p-8">
+                <h2 className="font-heading font-bold text-navy-800 text-xl mb-6 flex items-center gap-2">
+                  <FiActivity className="w-5 h-5 text-primary-500" /> Clinical Specialities
+                </h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[doctor.specialty, ...(doctor.specialties || [])]
+                    .filter((s, i, arr) => s && arr.indexOf(s) === i) // unique & truthy
+                    .map((spec) => (
+                      <div key={spec} className="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 group hover:border-primary-200 transition-colors">
+                        <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-primary-600 shadow-sm group-hover:bg-primary-600 group-hover:text-white transition-all">
+                          <FiCheck size={18} />
+                        </div>
+                        <span className="font-bold text-navy-800">{spec}</span>
+                      </div>
+                    ))}
                 </div>
               </div>
 

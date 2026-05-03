@@ -18,9 +18,9 @@ export const siteData = {
   contact: {
     address: 'near Dr I D Singh, Naya Bazar, Saharsa, Bihar 852201',
     phone: '+91 8544037256',
-    phone2: '9431223224',
+    phone2: '7909027287',
     email: 'contact@childclinic.com',
-    hours: 'Mon – Sat: 9:00 AM – 8:00 PM | Sun: 10:00 AM – 2:00 PM',
+    hours: 'Daily: 9:00 AM – 8:00 PM',
     whatsappLabel: 'WhatsApp Chat',
     whatsappSubLabel: 'Instant Support',
   },

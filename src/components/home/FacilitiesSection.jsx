@@ -5,12 +5,12 @@ import { FiArrowRight, FiImage, FiX, FiChevronLeft, FiChevronRight, FiMaximize2 
 import { getGalleryByFolderName } from '../../services/gallery'
 
 const FACILITIES = [
-  { icon: '👶', title: 'Advanced NICU', desc: 'Specialized intensive care for newborns requiring extra medical attention.' },
-  { icon: '💡', title: 'Phototherapy', desc: 'Modern LED phototherapy for effective treatment of newborn jaundice.' },
-  { icon: '🌬️', title: 'Nebulization & Oxygen', desc: 'Immediate respiratory support for asthma and breathing difficulties.' },
-  { icon: '💉', title: 'Vaccination Center', desc: 'All essential and optional pediatric vaccines as per IAP schedule.' },
-  { icon: '🏥', title: 'Emergency Care', desc: '24/7 pediatric emergency response and stabilization services.' },
-  { icon: '📈', title: 'Growth Monitoring', desc: 'Comprehensive tracking of physical and developmental milestones.' },
+  { icon: '👶', title: 'Advanced NICU', desc: 'Specialized intensive care for newborns requiring extra medical attention.', to: '/services/nicu-newborn-care' },
+  { icon: '💡', title: 'Phototherapy', desc: 'Modern LED phototherapy for effective treatment of newborn jaundice.', to: '/services/nicu-newborn-care' },
+  { icon: '🌬️', title: 'Nebulization & Oxygen', desc: 'Immediate respiratory support for asthma and breathing difficulties.', to: '/services/pediatric-emergency-service' },
+  { icon: '💉', title: 'Vaccination Center', desc: 'All essential and optional pediatric vaccines as per IAP schedule.', to: '/services/vaccination-centre-service' },
+  { icon: '🏥', title: 'Emergency Care', desc: '24/7 pediatric emergency response and stabilization services.', to: '/services/pediatric-emergency-service' },
+  { icon: '📈', title: 'Growth Monitoring', desc: 'Comprehensive tracking of physical and developmental milestones.', to: '/services/pediatric-opd' },
 ]
 
 // ── Lightbox Component ──────────────────────────────────────────────────────────
@@ -118,7 +118,6 @@ export default function FacilitiesSection() {
           </motion.div>
         </div>
 
-        {/* Facility Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
           {FACILITIES.map((fac, i) => (
             <motion.div
@@ -127,15 +126,22 @@ export default function FacilitiesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="bg-white p-8 rounded-3xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] group hover:border-primary-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                {fac.icon}
-              </div>
-              <h3 className="text-xl font-black text-navy-900 mb-3">{fac.title}</h3>
-              <p className="text-gray-500 text-sm font-medium leading-relaxed">
-                {fac.desc}
-              </p>
+              <Link
+                to={fac.to}
+                className="block bg-white p-8 rounded-3xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] group hover:border-primary-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full"
+              >
+                <div className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                  {fac.icon}
+                </div>
+                <h3 className="text-xl font-black text-navy-900 mb-3 group-hover:text-primary-600 transition-colors">{fac.title}</h3>
+                <p className="text-gray-500 text-sm font-medium leading-relaxed mb-6">
+                  {fac.desc}
+                </p>
+                <div className="flex items-center gap-2 text-xs font-bold text-primary-600 uppercase tracking-widest mt-auto">
+                  Learn More <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>

@@ -41,6 +41,7 @@ import AdminBlog from './pages/admin/AdminBlog'
 import AdminMessages from './pages/admin/AdminMessages'
 import AdminSettings from './pages/admin/AdminSettings'
 import AdminDoctors from './pages/admin/AdminDoctors'
+import AdminTreatments from './pages/admin/AdminTreatments'
 
 // Inner component so useVisitTracker runs inside BrowserRouter context
 function AppRoutes() {
@@ -83,6 +84,7 @@ function AppRoutes() {
         <Route index element={<AdminDashboard />} />
         <Route path="appointments" element={<AdminAppointments />} />
         <Route path="specialities" element={<AdminSpecialities />} />
+        <Route path="treatments" element={<AdminTreatments />} />
         <Route path="services" element={<AdminServices />} />
         <Route path="doctors" element={<AdminDoctors />} />
         <Route path="gallery" element={<AdminGallery />} />

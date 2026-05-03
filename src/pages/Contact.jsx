@@ -80,7 +80,7 @@ export default function Contact() {
             addressCountry: 'IN',
           },
           openingHoursSpecification: [
-            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '08:00', closes: '21:00' },
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '09:00', closes: '20:00' },
           ],
           hasMap: 'https://maps.google.com/?q=Child+Clinic+Shardha+Nagar+Saharsa',
         }}
@@ -115,7 +115,12 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-0.5">{label}</p>
-                    {href ? (
+                    {label === 'Phone' ? (
+                      <div className="flex flex-col">
+                        <a href={`tel:${siteData.contact.phone}`} className="font-medium text-navy-800 hover:text-primary-600 underline-offset-4 hover:underline">{siteData.contact.phone}</a>
+                        <a href={`tel:${siteData.contact.phone2}`} className="font-medium text-navy-800 hover:text-primary-600 underline-offset-4 hover:underline">{siteData.contact.phone2}</a>
+                      </div>
+                    ) : href ? (
                       <a href={href} className={`font-medium hover:underline ${red ? 'text-red-600' : 'text-navy-800 hover:text-primary-600'}`}>{value}</a>
                     ) : (
                       <p className="font-medium text-navy-800">{value}</p>

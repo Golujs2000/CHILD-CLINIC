@@ -51,28 +51,30 @@ export default function ServicesSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
-                  className={`bg-white border ${color.border} rounded-[10px] overflow-hidden shadow-card group hover:-translate-y-1 transition-all duration-300`}
+                  className="group"
                 >
-                  <div className={`${color.bg} px-6 pt-8 pb-6 flex items-center gap-5 transition-colors duration-300`}>
-                    <div className={`${color.iconBg} w-16 h-16 rounded-[5px] flex items-center justify-center shadow-md flex-shrink-0 transition-transform duration-300 group-hover:scale-110`}>
-                      <span className="text-3xl leading-none">{spec.icon}</span>
+                  <Link
+                    to={`/specialities/${spec.slug}`}
+                    className={`block bg-white border ${color.border} rounded-[10px] overflow-hidden shadow-card group hover:-translate-y-1 transition-all duration-300 h-full`}
+                  >
+                    <div className={`${color.bg} px-6 pt-8 pb-6 flex items-center gap-5 transition-colors duration-300`}>
+                      <div className={`${color.iconBg} w-16 h-16 rounded-[5px] flex items-center justify-center shadow-md flex-shrink-0 transition-transform duration-300 group-hover:scale-110`}>
+                        <span className="text-3xl leading-none">{spec.icon}</span>
+                      </div>
+                      <div>
+                        <h3 className="font-heading font-bold text-navy-800 text-lg leading-snug group-hover:text-primary-700 transition-colors">{spec.name}</h3>
+                        <span className={`text-xs font-semibold ${color.text} mt-1 block`}>{spec.available || 'OPD Hours'}</span>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-heading font-bold text-navy-800 text-lg leading-snug">{spec.name}</h3>
-                      <span className={`text-xs font-semibold ${color.text} mt-1 block`}>{spec.available || 'OPD Hours'}</span>
+                    <div className="px-6 py-5">
+                      <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">
+                        {spec.description}
+                      </p>
+                      <div className={`flex items-center gap-1.5 text-sm font-semibold group-hover:gap-3 transition-all ${color.text}`}>
+                        View Details <FiArrowRight className="w-4 h-4" />
+                      </div>
                     </div>
-                  </div>
-                  <div className="px-6 py-5">
-                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">
-                      {spec.description}
-                    </p>
-                    <Link
-                      to={`/specialities/${spec.slug}`}
-                      className={`flex items-center gap-1.5 text-sm font-semibold hover:gap-3 transition-all ${color.text}`}
-                    >
-                      View Details <FiArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
+                  </Link>
                 </motion.div>
               )
             })}

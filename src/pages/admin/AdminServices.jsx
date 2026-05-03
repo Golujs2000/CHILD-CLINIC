@@ -42,7 +42,15 @@ export default function AdminServices() {
   const fetchAll = async () => {
     setLoading(true)
     try {
-      const [svc, specs] = await Promise.all([getHospitalServices(), getSpecialities()])
+      const svcPromise = getHospitalServices().catch(err => {
+        console.error('getHospitalServices error:', err)
+        throw err
+      })
+      const specsPromise = getSpecialities().catch(err => {
+        console.error('getSpecialities error:', err)
+        throw err
+      })
+      const [svc, specs] = await Promise.all([svcPromise, specsPromise])
       setServices(svc)
       setSpecialities(specs)
     } catch (err) {

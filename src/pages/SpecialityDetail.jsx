@@ -13,6 +13,7 @@ import {
 } from 'react-icons/fi'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 import { db } from '../firebase/config'
+import { getInitials, slugify } from '../utils/helpers'
 import SEO from '../components/SEO'
 import { useDoctors } from '../hooks/useDoctors'
 import { siteData } from '../data/siteData'
@@ -169,7 +170,10 @@ export default function SpecialityDetail() {
               {/* Key Highlights Grid */}
               {Array.isArray(speciality.features) && speciality.features.length > 0 && (
                 <div className="space-y-6">
-                  <h2 className="text-3xl font-bold text-navy-800 px-2 tracking-tight">Key Clinical Highlights</h2>
+                  <div className="flex items-center justify-between px-2">
+                    <h2 className="text-3xl font-bold text-navy-800 tracking-tight">Key Clinical Highlights</h2>
+                    <span className="px-3 py-1 bg-primary-50 text-primary-600 text-[10px] font-black uppercase rounded-lg">Advanced Care</span>
+                  </div>
                   <div className="grid sm:grid-cols-2 gap-5">
                     {speciality.features.map((feature, i) => (
                       <motion.div 
@@ -180,15 +184,81 @@ export default function SpecialityDetail() {
                         transition={{ delay: i * 0.05 }}
                         className="group p-6 rounded-3xl bg-white border border-gray-100 hover:border-primary-200 hover:shadow-lg transition-all duration-300"
                       >
-                        <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center mb-4 group-hover:bg-primary-600 group-hover:text-white transition-colors">
-                          <FiCheck size={20} />
+                        <div className="flex items-start gap-4">
+                          <div className="w-10 h-10 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center shrink-0 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+                            <FiCheck size={20} />
+                          </div>
+                          <div>
+                            <p className="text-navy-800 font-black text-lg leading-tight">{feature}</p>
+                            <p className="text-gray-400 text-xs mt-1 font-medium">Available in Saharsa</p>
+                          </div>
                         </div>
-                        <p className="text-navy-800 font-black text-lg leading-tight">{feature}</p>
                       </motion.div>
                     ))}
                   </div>
                 </div>
               )}
+
+              {/* Conditions We Treat Section (Added More Details) */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-navy-800 rounded-[32px] p-10 text-white shadow-2xl shadow-navy-900/10"
+              >
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-primary-400">
+                    <FiActivity size={24} />
+                  </div>
+                  <h2 className="text-3xl font-bold tracking-tight">Conditions We Treat</h2>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-x-12 gap-y-4">
+                  {[
+                    'Acute & Chronic Childhood Infections',
+                    'Neonatal Jaundice & Respiratory Distress',
+                    'Nutritional Deficiencies & Growth Delays',
+                    'Childhood Asthma & Allergic Bronchitis',
+                    'Congenital Heart & Renal Issues',
+                    'Endocrine & Hormonal Imbalances'
+                  ].map((condition, i) => (
+                    <div key={i} className="flex items-center gap-3 py-3 border-b border-white/5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary-400"></div>
+                      <span className="text-white/80 font-medium">{condition}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mt-8">
+                  * Comprehensive diagnosis and therapeutic management provided in Saharsa.
+                </p>
+              </motion.div>
+
+              {/* Clinical Journey Section */}
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-navy-800 px-2 tracking-tight">Clinical Journey</h2>
+                <div className="relative pl-8 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-0.5 before:bg-primary-100">
+                  {[
+                    { title: 'Initial Consultation', desc: 'Expert physical examination and history taking by Dr. Anshuman.' },
+                    { title: 'Rapid Diagnostics', desc: 'In-house lab tests and immediate reporting for quick decision making.' },
+                    { title: 'Personalized Treatment Plan', desc: 'Tailored medical and nutritional plan based on international pediatric protocols.' },
+                    { title: 'Continuous Follow-up', desc: 'Digital tracking of growth and recovery milestones for every patient.' }
+                  ].map((step, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="relative"
+                    >
+                      <div className="absolute -left-[28px] top-1.5 w-6 h-6 rounded-full bg-white border-4 border-primary-600 z-10 shadow-sm"></div>
+                      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <h4 className="font-black text-navy-800 mb-1">{step.title}</h4>
+                        <p className="text-gray-500 text-sm font-medium">{step.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
 
               {/* Specialists Carousel/Grid */}
               {relatedDoctors.length > 0 && (
@@ -206,7 +276,7 @@ export default function SpecialityDetail() {
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
                       >
-                        <Link to={`/doctors/${doc.id}`} className="block group">
+                        <Link to={`/doctors/${doc.slug || slugify(doc.name)}`} className="block group">
                           <div className="bg-white rounded-[32px] p-6 shadow-sm border border-gray-100 hover:border-primary-200 hover:shadow-xl transition-all duration-500 overflow-hidden relative">
                             <div className="flex items-center gap-5 relative z-10">
                               <div className="w-20 h-20 rounded-2xl bg-gray-100 overflow-hidden shrink-0 border-2 border-white shadow-md">
@@ -234,10 +304,86 @@ export default function SpecialityDetail() {
                   </div>
                 </div>
               )}
+
+              {/* FAQ Section (New) */}
+              {Array.isArray(speciality.faqs) && speciality.faqs.length > 0 && (
+                <div className="space-y-6">
+                  <h2 className="text-3xl font-bold text-navy-800 px-2 tracking-tight">Frequently Asked Questions</h2>
+                  <div className="space-y-4">
+                    {speciality.faqs.map((faq, i) => (
+                      <motion.div 
+                        key={i}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1 }}
+                        className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm"
+                      >
+                        <h4 className="font-black text-navy-800 mb-2 flex gap-3">
+                          <span className="text-primary-600">Q.</span> {faq.q}
+                        </h4>
+                        <p className="text-gray-500 text-sm font-medium pl-7 leading-relaxed">
+                          {faq.a}
+                        </p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Right Sidebar */}
             <div className="space-y-8">
+              {/* Doctor Profile Sidebar Card (New) */}
+              {(relatedDoctors[0] || doctors.find(d => d.name.includes('Anshuman'))) && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-[32px] p-8 border border-gray-100 shadow-xl shadow-navy-900/5 relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-primary-50 rounded-full blur-3xl -translate-y-10 translate-x-10"></div>
+                  
+                  <div className="relative z-10">
+                    <h4 className="text-[10px] font-black text-primary-600 uppercase tracking-widest mb-6">Expert in Charge</h4>
+                    
+                    <div className="flex items-center gap-5 mb-8">
+                      <div className="w-20 h-20 rounded-2xl bg-gray-100 overflow-hidden border-2 border-white shadow-md">
+                        <img 
+                          src={(relatedDoctors[0] || doctors.find(d => d.name.includes('Anshuman'))).image || '/doctor-placeholder.png'} 
+                          alt={(relatedDoctors[0] || doctors.find(d => d.name.includes('Anshuman'))).name} 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-navy-800 text-lg leading-tight">{(relatedDoctors[0] || doctors.find(d => d.name.includes('Anshuman'))).name}</h3>
+                        <p className="text-gray-400 text-xs font-medium mt-1">{(relatedDoctors[0] || doctors.find(d => d.name.includes('Anshuman'))).qualification}</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Link 
+                        to="/book-appointment" 
+                        state={{ 
+                          department: speciality.name,
+                          doctorId: (relatedDoctors[0] || doctors.find(d => d.name.includes('Anshuman'))).id 
+                        }}
+                        className="w-full flex items-center justify-center gap-3 bg-primary-600 hover:bg-primary-500 text-white font-black py-4 rounded-2xl shadow-lg shadow-primary-900/20 transition-all hover:scale-[1.02]"
+                      >
+                        <FiCalendar size={18} /> Book Appointment
+                      </Link>
+                      
+                      <Link 
+                        to={`/doctors/${(relatedDoctors[0] || doctors.find(d => d.name.includes('Anshuman'))).slug || slugify((relatedDoctors[0] || doctors.find(d => d.name.includes('Anshuman'))).name)}`}
+                        className="w-full flex items-center justify-center gap-3 bg-navy-50 text-navy-800 font-bold py-4 rounded-2xl hover:bg-navy-100 transition-colors"
+                      >
+                        <FiUser size={18} /> View Full Profile
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
               {/* Premium Appointment CTA */}
               <motion.div 
                 initial={{ opacity: 0, x: 20 }} 
@@ -245,18 +391,11 @@ export default function SpecialityDetail() {
                 className="bg-navy-900 rounded-[32px] p-10 text-white relative overflow-hidden shadow-2xl shadow-navy-900/40"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary-600/20 blur-3xl rounded-full translate-x-10 -translate-y-10"></div>
-                <h3 className="text-3xl font-bold mb-4 tracking-tight leading-tight">Priority Appointment</h3>
+                <h3 className="text-3xl font-bold mb-4 tracking-tight leading-tight">Priority Helpline</h3>
                 <p className="text-white/70 mb-8 text-base leading-relaxed">
-                  Skip the queue by booking a priority consultation for {speciality.name}.
+                  Direct contact for {speciality.name} emergencies and priority bookings.
                 </p>
-                <Link 
-                  to="/book-appointment" 
-                  state={{ department: speciality.name }} 
-                  className="w-full flex items-center justify-center gap-3 bg-primary-600 hover:bg-primary-500 text-white font-black py-5 rounded-2xl shadow-xl shadow-primary-900/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  <FiCalendar size={20} /> Book Now
-                </Link>
-                <div className="mt-10 pt-10 border-t border-white/10">
+                <div className="pt-8 border-t border-white/10">
                   <p className="text-[10px] text-white/40 uppercase font-black tracking-widest mb-4">Direct Contact</p>
                   <a href={`tel:${siteData.contact.phone}`} className="flex items-center gap-4 group">
                     <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover:bg-primary-600 transition-colors">

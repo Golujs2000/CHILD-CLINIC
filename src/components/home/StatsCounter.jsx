@@ -9,7 +9,15 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { FiUsers, FiHeart, FiShield, FiAward } from 'react-icons/fi'
 import { siteData } from '../../data/siteData'
+
+const statIcons = {
+  'Happy Families': FiUsers,
+  'Newborns Cared For': FiHeart,
+  'Vaccinations Done': FiShield,
+  'Years Experience': FiAward
+}
 
 function Counter({ value, suffix, duration = 2000 }) {
   const [count, setCount] = useState(0)
@@ -48,14 +56,22 @@ export default function StatsCounter() {
           viewport={{ once: true }}
           className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-x divide-white/10 text-center"
         >
-          {siteData.stats.map(({ label, value, suffix }, i) => (
-            <div key={label} className="px-4">
-              <h3 className="font-heading font-bold text-4xl lg:text-5xl text-white mb-2">
-                <Counter value={value} suffix={suffix} />
-              </h3>
-              <p className="text-primary-300 font-medium text-sm lg:text-base uppercase tracking-wider">{label}</p>
-            </div>
-          ))}
+          {siteData.stats.map(({ label, value, suffix }, i) => {
+            const Icon = statIcons[label] || FiHeart
+            return (
+              <div key={label} className="px-4 group">
+                <div className="flex justify-center mb-6">
+                  <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-primary-400 group-hover:bg-primary-600 group-hover:text-white transition-all duration-300">
+                    <Icon size={28} />
+                  </div>
+                </div>
+                <h3 className="font-heading font-bold text-4xl lg:text-5xl text-white mb-2">
+                  <Counter value={value} suffix={suffix} />
+                </h3>
+                <p className="text-primary-300 font-medium text-sm lg:text-base uppercase tracking-widest">{label}</p>
+              </div>
+            )
+          })}
         </motion.div>
       </div>
     </section>
