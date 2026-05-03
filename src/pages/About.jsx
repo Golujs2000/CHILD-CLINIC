@@ -115,7 +115,7 @@ export default function About() {
                     <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-primary-400 rounded-tl-lg"></div>
                     <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-primary-400 rounded-tr-lg"></div>
                     <img 
-                      src="https://firebasestorage.googleapis.com/v0/b/child-clinic.firebasestorage.app/o/gallery%2F1777714740704_DR.%20ANSHUMAN01.webp?alt=media&token=27dc5999-2e10-4cd4-a081-9a71250a0a89" 
+                      src="https://firebasestorage.googleapis.com/v0/b/child-clinic.firebasestorage.app/o/gallery%2F1777810933653_DR.%20ANSHUMAN.webp?alt=media&token=c9a4fa9b-7016-40fb-b969-51919afa90d2" 
                       alt="Dr. Anshuman" 
                       className="w-full h-auto max-h-[460px] object-contain object-bottom relative z-10" 
                     />
@@ -171,7 +171,7 @@ export default function About() {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="relative">
               <div className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white bg-primary-50">
                 <img 
-                  src="https://firebasestorage.googleapis.com/v0/b/child-clinic.firebasestorage.app/o/gallery%2F1777714740704_DR.%20ANSHUMAN01.webp?alt=media&token=27dc5999-2e10-4cd4-a081-9a71250a0a89" 
+                  src="https://firebasestorage.googleapis.com/v0/b/child-clinic.firebasestorage.app/o/gallery%2F1777810933653_DR.%20ANSHUMAN.webp?alt=media&token=c9a4fa9b-7016-40fb-b969-51919afa90d2" 
                   alt="Dr. Anshuman" 
                   className="w-full h-full object-cover" 
                 />

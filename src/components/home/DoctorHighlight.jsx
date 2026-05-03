@@ -36,7 +36,7 @@ export default function DoctorHighlight() {
           >
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-[12px] border-slate-50 ring-1 ring-slate-200">
               <img 
-                src="https://firebasestorage.googleapis.com/v0/b/child-clinic.firebasestorage.app/o/gallery%2F1777714740704_DR.%20ANSHUMAN01.webp?alt=media&token=27dc5999-2e10-4cd4-a081-9a71250a0a89" 
+                src="https://firebasestorage.googleapis.com/v0/b/child-clinic.firebasestorage.app/o/gallery%2F1777810933653_DR.%20ANSHUMAN.webp?alt=media&token=c9a4fa9b-7016-40fb-b969-51919afa90d2" 
                 alt="Dr. Anshuman" 
                 className="w-full h-full object-cover aspect-[4/5] object-top"
               />
