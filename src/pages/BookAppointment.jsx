@@ -18,8 +18,8 @@ export default function BookAppointment() {
     <>
       <SEO
         title="Book an Appointment"
-        description="Book a homeopathic appointment at Child Clinic, Saharsa online. Choose your department, select a date, and our team confirms within 30 minutes. Consultation by appointment."
-        keywords={['book appointment homeopathy Saharsa', 'online appointment homeopathy Saharsa', 'doctor appointment Bihar', 'Child Clinic appointment']}
+        description="Book your pediatric consultation at Child Clinic, Saharsa online. Trusted child healthcare in the Kosi region with 30-minute confirmation. Professional pediatric and newborn care."
+        keywords={['book appointment Saharsa', 'online child doctor appointment Saharsa', 'doctor appointment Kosi region', 'Child Clinic appointment Bihar']}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'ReserveAction',

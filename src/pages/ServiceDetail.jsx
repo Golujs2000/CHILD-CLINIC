@@ -61,32 +61,62 @@ export default function ServiceDetail() {
   return (
     <>
       <SEO 
-        title={`${service.name} — Child Clinic Services`} 
+        title={`${service.name} — Child Clinic`} 
         description={service.description}
+        keywords={[service.name, `${service.name} Saharsa`, 'hospital facility Saharsa', 'best NICU Kosi region', 'child clinic Saharsa services']}
       />
 
       <main className="bg-gray-50 pb-20">
-        {/* Header Section */}
-        <section className="bg-hero-gradient text-white pt-32 pb-16 px-4">
-          <div className="container-max">
-            <Link to="/services" className="inline-flex items-center gap-2 text-primary-200 hover:text-white transition-colors mb-6 text-sm font-bold">
-              <FiArrowLeft /> Back to Services
+        {/* Header Section with Animated Gradient & Glassmorphism */}
+        <section className="relative bg-hero-gradient text-white pt-36 pb-20 overflow-hidden">
+          {/* Decorative patterns */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/20 to-transparent"></div>
+
+          <div className="container-max relative z-10 px-4">
+            <Link to="/services" className="inline-flex items-center gap-2 text-primary-200 hover:text-white transition-all mb-8 text-sm font-bold group">
+              <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" /> Back to All Facilities
             </Link>
-            <div className="flex flex-col md:flex-row md:items-center gap-6">
-              <div className="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center text-4xl shadow-xl">
+            
+            <div className="flex flex-col md:flex-row md:items-center gap-8">
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="w-24 h-24 rounded-[32px] bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-5xl shadow-2xl shadow-primary-900/40"
+              >
                 {service.icon || '🏥'}
-              </div>
+              </motion.div>
               <div>
-                <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-black uppercase tracking-widest mb-2 border border-white/30">
-                  {service.category || 'Hospital Facility'}
-                </span>
-                <h1 className="font-heading text-4xl md:text-5xl font-black">{service.name}</h1>
-                <div className="flex flex-wrap gap-4 mt-3">
-                  <div className="flex items-center gap-2 text-white/70 text-sm">
-                    <FiClock className="text-accent-400" /> {service.available || '24 × 7'}
+                <motion.div 
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="flex items-center gap-2 mb-3"
+                >
+                  <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-[0.2em] border border-white/20">
+                    {service.category || 'Hospital Facility'}
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-400"></span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-primary-200">Saharsa Unit</span>
+                </motion.div>
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="font-heading text-5xl md:text-6xl font-black tracking-tight"
+                >
+                  {service.name}
+                </motion.h1>
+                <div className="flex flex-wrap gap-6 mt-6">
+                  <div className="flex items-center gap-2.5 text-white/70 text-sm font-medium">
+                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                      <FiClock className="text-accent-400" />
+                    </div>
+                    {service.available || '24 × 7 Service'}
                   </div>
-                  <div className="flex items-center gap-2 text-white/70 text-sm">
-                    <FiActivity className="text-accent-400" /> Advanced Infrastructure
+                  <div className="flex items-center gap-2.5 text-white/70 text-sm font-medium">
+                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+                      <FiActivity className="text-accent-400" />
+                    </div>
+                    High-Tech Infrastructure
                   </div>
                 </div>
               </div>
@@ -94,87 +124,132 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <div className="container-max px-4 -mt-8">
+        <div className="container-max px-4 -mt-12 relative z-20">
           <div className="grid lg:grid-cols-3 gap-8">
             
             {/* Left Content */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Detailed Description */}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="card p-8">
-                <h2 className="text-2xl font-bold text-navy-800 mb-6 flex items-center gap-2">
-                  <FiInfo className="text-primary-600" /> Service Details
-                </h2>
-                <p className="text-gray-600 leading-relaxed text-lg mb-6">
+            <div className="lg:col-span-2 space-y-10">
+              {/* Detailed Info Card */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                className="bg-white rounded-[32px] p-10 shadow-xl shadow-navy-900/5 border border-gray-100"
+              >
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 rounded-2xl bg-primary-50 flex items-center justify-center text-primary-600">
+                    <FiInfo size={24} />
+                  </div>
+                  <h2 className="text-3xl font-bold text-navy-800 tracking-tight">Facility Details</h2>
+                </div>
+                
+                <p className="text-gray-600 leading-relaxed text-xl font-medium mb-10">
                   {service.description}
                 </p>
                 
-                <div className="bg-primary-50 border border-primary-100 rounded-2xl p-6">
-                  <h4 className="font-bold text-primary-900 mb-3 text-base">Clinical Importance</h4>
-                  <p className="text-primary-700 text-sm leading-relaxed">
-                    This facility is part of Child Clinic's commitment to providing world-class pediatric care in Saharsa. 
-                    Equipped with modern technology and monitored by Dr. Anshuman's expert team, we ensure your child receives the best diagnostic and therapeutic support.
-                  </p>
+                <div className="grid sm:grid-cols-2 gap-6 pt-10 border-t border-gray-50">
+                  <div className="p-6 rounded-3xl bg-primary-50/50 border border-primary-100">
+                    <h4 className="font-black text-primary-900 mb-3 text-xs uppercase tracking-widest">Saharsa Center Excellence</h4>
+                    <p className="text-primary-800/70 text-sm leading-relaxed font-medium">
+                      Equipped with modern technology and monitored by Dr. Anshuman's expert team, we ensure the highest standards of safety.
+                    </p>
+                  </div>
+                  <div className="p-6 rounded-3xl bg-accent-50/50 border border-accent-100">
+                    <h4 className="font-black text-accent-900 mb-3 text-xs uppercase tracking-widest">Kosi Region Support</h4>
+                    <p className="text-accent-800/70 text-sm leading-relaxed font-medium">
+                      As a key medical hub, this facility serves thousands of families across the Kosi region with dedicated 24/7 support.
+                    </p>
+                  </div>
                 </div>
               </motion.div>
 
-              {/* Related Specialities */}
+              {/* Related Specialities Chips */}
               {Array.isArray(service.relatedSpecialties) && service.relatedSpecialties.length > 0 && (
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="card p-8">
-                  <h2 className="text-2xl font-bold text-navy-800 mb-6">Linked Specialities</h2>
+                <div className="space-y-6">
+                  <h2 className="text-3xl font-bold text-navy-800 px-2 tracking-tight">Governing Specialities</h2>
                   <div className="grid sm:grid-cols-2 gap-4">
                     {service.relatedSpecialties.map((specName, i) => (
-                      <Link 
-                        key={i} 
-                        to="/specialities" 
-                        className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 hover:border-primary-200 hover:bg-primary-50 transition-all"
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.05 }}
                       >
-                        <span className="font-semibold text-navy-800 group-hover:text-primary-700">{specName}</span>
-                        <FiArrowRight className="text-gray-300 group-hover:text-primary-600 group-hover:translate-x-1 transition-all" />
-                      </Link>
+                        <Link 
+                          to="/specialities" 
+                          className="group flex items-center justify-between p-6 rounded-3xl bg-white border border-gray-100 hover:border-primary-200 hover:shadow-xl transition-all duration-300"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-all">
+                              <FiActivity size={18} />
+                            </div>
+                            <span className="font-black text-navy-800 group-hover:text-primary-700 transition-colors">{specName}</span>
+                          </div>
+                          <FiArrowRight className="text-gray-300 group-hover:text-primary-600 group-hover:translate-x-2 transition-all" />
+                        </Link>
+                      </motion.div>
                     ))}
                   </div>
-                </motion.div>
+                </div>
               )}
             </div>
 
             {/* Right Sidebar */}
-            <div className="space-y-6">
+            <div className="space-y-8">
               {/* Support Card */}
-              <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="card p-8 border-primary-500 border-2 shadow-2xl">
-                <h3 className="text-2xl font-bold text-navy-800 mb-4">Contact for Query</h3>
-                <p className="text-gray-500 mb-6 text-sm">
-                  Need more information about our {service.name} facility? Call us now for immediate assistance.
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }} 
+                animate={{ opacity: 1, x: 0 }} 
+                className="bg-white rounded-[32px] p-10 border-2 border-primary-500 shadow-2xl shadow-primary-900/10 relative overflow-hidden"
+              >
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary-50 rounded-full blur-3xl"></div>
+                <h3 className="text-3xl font-bold text-navy-800 mb-4 tracking-tight leading-tight">Help & Queries</h3>
+                <p className="text-gray-500 mb-8 text-base leading-relaxed">
+                  Need more information about the **{service.name}** facility at Child Clinic?
                 </p>
-                <a href={`tel:${siteData.contact.phone}`} className="btn-primary w-full justify-center mb-4 py-4 text-base">
-                  <FiPhone /> Call Now
-                </a>
-                <Link to="/contact" className="btn-secondary w-full justify-center">
-                  Send Message
-                </Link>
+                <div className="space-y-4">
+                  <a href={`tel:${siteData.contact.phone}`} className="btn-primary w-full justify-center py-5 text-lg shadow-xl shadow-primary-900/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                    <FiPhone /> Call Now
+                  </a>
+                  <Link to="/contact" className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-gray-50 text-navy-800 font-bold hover:bg-gray-100 transition-colors">
+                    Send Message
+                  </Link>
+                </div>
               </motion.div>
 
-              {/* Quick Info */}
-              <div className="card p-6">
-                <h4 className="font-bold text-navy-800 mb-4 uppercase tracking-widest text-xs">Quick Info</h4>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center shrink-0">
-                      <FiCheck className="text-green-600" />
+              {/* Status Indicators */}
+              <div className="bg-navy-900 rounded-[32px] p-8 text-white">
+                <h4 className="font-black text-white/40 mb-6 uppercase tracking-widest text-[10px]">Infrastructure Status</h4>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                      <FiCheck className="text-green-400" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-navy-800">Available 24/7</p>
-                      <p className="text-[10px] text-gray-400">Emergency support active</p>
+                      <p className="text-sm font-bold text-white">Operational 24/7</p>
+                      <p className="text-[10px] text-white/40 font-medium">Emergency team on standby</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                      <FiCheck className="text-blue-600" />
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
+                      <FiCheck className="text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-navy-800">Expert Team</p>
-                      <p className="text-[10px] text-gray-400">Monitored by specialists</p>
+                      <p className="text-sm font-bold text-white">Expert Monitored</p>
+                      <p className="text-[10px] text-white/40 font-medium">Dr. Anshuman's oversight</p>
                     </div>
                   </div>
+                </div>
+              </div>
+
+              {/* region Badge */}
+              <div className="bg-accent-50 rounded-3xl p-6 border border-accent-100 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-accent-600 shadow-sm">
+                  <FiActivity size={24} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-accent-900 uppercase tracking-wider">Kosi Region Hub</p>
+                  <p className="text-[10px] text-accent-700 font-medium">Trusted by Saharsa families</p>
                 </div>
               </div>
             </div>

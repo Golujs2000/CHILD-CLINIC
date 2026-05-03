@@ -34,8 +34,9 @@ export default function Blog() {
   return (
     <>
       <SEO
-        title="Health Blog"
-        description="Read expert pediatric health tips, newborn care guides, and medical insights from Dr. Anshuman at Child Clinic, Saharsa."
+        title="Health Tips & Blog"
+        description="Health tips and pediatric medical advice for parents in Saharsa and the Kosi region. Stay informed with Child Clinic's latest articles on child care and wellness."
+        keywords={['child health tips Saharsa', 'pediatric blog Bihar', 'Kosi region health advice', 'Dr. Anshuman blog', 'child care tips Kosi division']}
       />
 
       {/* Hero */}

@@ -45,7 +45,8 @@ export default function AdminServices() {
       const [svc, specs] = await Promise.all([getHospitalServices(), getSpecialities()])
       setServices(svc)
       setSpecialities(specs)
-    } catch {
+    } catch (err) {
+      console.error('Admin fetchAll error:', err)
       toast.error('Failed to load services')
     } finally {
       setLoading(false)

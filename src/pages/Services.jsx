@@ -214,7 +214,8 @@ export default function Services() {
     <>
       <SEO
         title="Medical Specialities & Departments"
-        description="Explore Child Clinic's medical specialities — general pediatrics, neonatology, pediatric nutrition, and specialized care for children in Saharsa, Bihar."
+        description="Explore our specialized pediatric units in Saharsa — including Neonatology, NICU, Vaccination, and Emergency care for the Kosi region, Bihar."
+        keywords={['pediatric specialities Saharsa', 'NICU Saharsa', 'child vaccination Saharsa', 'pediatric emergency Kosi region', 'neonatology Saharsa']}
       />
 
       {/* Hero */}

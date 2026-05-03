@@ -62,8 +62,8 @@ export default function Contact() {
     <>
       <SEO
         title={`Contact Us — ${siteData.name}`}
-        description={`Contact Child Clinic, Saharsa at ${siteData.contact.phone}. Located at ${siteData.contact.address}. Book appointments online.`}
-        keywords={['contact Child Clinic', 'clinic address Saharsa', 'Child Clinic phone number', 'book appointment pediatric Saharsa']}
+        description={`Contact Child Clinic, Saharsa at ${siteData.contact.phone}. Located at ${siteData.contact.address}. Serving families across the Kosi region for over 7 years.`}
+        keywords={['contact Child Clinic Saharsa', 'clinic address Saharsa', 'Child Clinic phone number', 'book appointment pediatric Kosi region', 'best child doctor Kosi division']}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'MedicalClinic',

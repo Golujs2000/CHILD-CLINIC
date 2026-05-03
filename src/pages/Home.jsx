@@ -52,8 +52,9 @@ export default function Home() {
   return (
     <>
       <SEO
-        description="Child Clinic, near Dr I D Singh, Shardha Nagar, Saharsa — trusted pediatric and general emergency care. Providing expert medical services for children and families in Saharsa, Bihar."
-        keywords={['child clinic Saharsa', 'pediatric doctor Saharsa', 'emergency clinic Saharsa', 'best child specialist Saharsa Bihar', 'Dr I D Singh Saharsa', 'Shardha Nagar Saharsa clinic']}
+        title={`Home — ${siteData.name}`}
+        description="Child Clinic, near Dr I D Singh, Naya Bazar, Saharsa — the most trusted pediatric and general emergency care in the Kosi region. Providing expert medical services for children and families across Saharsa, Supaul, and Madhepura."
+        keywords={['child clinic Saharsa', 'pediatric doctor Saharsa', 'emergency clinic Saharsa', 'best child specialist Saharsa Bihar', 'Dr I D Singh Saharsa', 'Kosi region child care', 'best pediatrician Kosi division']}
         jsonLd={{
           ...hospitalSchema,
           medicalSpecialty: specNames.length > 0 ? specNames : ['Pediatrics', 'Neonatology', 'Child Nutrition', 'Pediatric Emergency'],

@@ -66,7 +66,8 @@ export default function HospitalServices() {
     <>
       <SEO
         title="Clinic Services & Facilities"
-        description={`Explore ${siteData.name}'s range of pediatric services — Pediatric OPD, NICU, Vaccination Centre, and Emergency care.`}
+        description={`Explore ${siteData.name}'s range of pediatric services in Saharsa — Level II NICU, Pathology Lab, Pharmacy, and Emergency care for the Kosi region.`}
+        keywords={['clinic services Saharsa', 'NICU facility Kosi region', 'pathology lab Saharsa', 'pharmacy Saharsa', 'pediatric hospital Kosi division']}
       />
 
       {/* ── Hero ── */}

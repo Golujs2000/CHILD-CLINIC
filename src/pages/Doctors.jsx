@@ -25,8 +25,8 @@ export default function Doctors() {
     <>
       <SEO
         title="Our Doctors"
-        description="Meet Dr. Anshuman, expert Pediatrician and Neonatologist at Child Clinic, Saharsa. View profiles and book appointments online for specialized child care."
-        keywords={['child specialist Saharsa', 'best pediatrician Saharsa Bihar', 'newborn specialist Saharsa', 'Dr. Anshuman Saharsa', 'pediatric clinic Bihar']}
+        description="Meet Dr. Anshuman and our expert pediatric team at Child Clinic, Saharsa. Top-rated child specialist and neonatologist in the Kosi region, Bihar."
+        keywords={['child specialist Saharsa', 'best pediatrician Saharsa Bihar', 'newborn specialist Kosi region', 'Dr. Anshuman Saharsa', 'pediatric clinic Kosi division']}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',

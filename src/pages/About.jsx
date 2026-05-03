@@ -50,8 +50,8 @@ export default function About() {
     <>
       <SEO
         title={`About Us — ${siteData.name}`}
-        description={`Learn about Child Clinic, Shardha Nagar, Saharsa — founded in ${siteData.founded}. Providing expert pediatric and general care for families in Saharsa, Bihar.`}
-        keywords={['about Child Clinic', 'pediatric clinic Saharsa', 'child specialist Saharsa', 'best child doctor Saharsa Bihar', 'Shardha Nagar Saharsa']}
+        description={`Learn about Child Clinic, Naya Bazar, Saharsa — the most trusted pediatric care centre in the Kosi region. Providing expert medical services since ${siteData.founded}.`}
+        keywords={['about Child Clinic Saharsa', 'pediatric clinic Saharsa', 'child specialist Saharsa', 'best child doctor Kosi region', 'Naya Bazar Saharsa', 'Kosi division pediatric care']}
       />
 
       <main className="flex-1">

@@ -107,8 +107,9 @@ export default function Gallery() {
   return (
     <>
       <SEO
-        title="Gallery"
-        description="Explore Child Clinic's welcoming facility, diagnostic equipment, and clinic environment through our photo gallery."
+        title="Our Clinic Gallery"
+        description="View photos of Child Clinic's modern Level II NICU, pediatric OPD, and advanced medical facilities in Saharsa, Bihar. Serving the Kosi region with excellence."
+        keywords={['child clinic photos Saharsa', 'NICU Saharsa images', 'Kosi region hospital gallery', 'pediatric clinic interior Bihar', 'medical facilities Saharsa']}
       />
 
       {/* Hero */}
